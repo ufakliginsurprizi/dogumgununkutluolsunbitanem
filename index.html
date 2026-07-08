@@ -518,6 +518,8 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
 </head>
 <body class="kilitli cimenli">
 
+<video id="cicekVideo" playsinline muted style="position:fixed; inset:0; width:100vw; height:100vh; object-fit:cover; z-index:999; pointer-events:none; mix-blend-mode:multiply; display:none;"></video>
+
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <clipPath id="kalpKlip" clipPathUnits="objectBoundingBox">
@@ -734,6 +736,7 @@ const AYAR = {
   sifre: "2407",
   sifreIpucu: "İpucu: Bizim için en özel tarih 😉",   
   kilitArkaplanFoto: "",   
+  videoDosyaAdi: "cicek_animasyon.mp4", // GitHub'a yükleyeceğin çiçek animasyon videosunun ismi
 
   // 0) Açılış — kilit açılınca gelen ilk ekran
   acilisFoto: "",          
@@ -767,9 +770,9 @@ const AYAR = {
   zarfNotu: "Doğum günün kutlu olsun aşkım ❤️ Aşağı kaydır, mektubun orada...",
 
   // 5) Mektup
-  mektupBaslik: "Doğum Günün Kutlu Olun Aşkım!",
-  mektup: "Canım benim,|Bir yaş daha büyüdün ve ben hâlâ sana her baktığımda ilk günkü gibi heyecanlanıyorum. Bu siteyi senin için yaptım çünkü sana olan sevgimi anlatmaya bazen kelimeler yetmiyor, ben de oturup kod yazdım.|Yeni yaşın sana sağlık, huzur ve bol bol kahkaha getirsin. En sade anlarımız, büyük kutlamalarımız, tüm günlerimiz... hepsinde yanındayım.|Nice mutlu senelere...",
-  imza: "— Seni çok seven sevgilin ❤️",
+  mektupBaslik: "Doğum Günün Kutlu Olsun Aşkım!",
+  mektup: "Canım benim,|Bir yaş daha büyüdün ve ben hâlâ sana her baktığımda ilk günkü gibi heyecanlanıyorum. Bu siteyi senin için yaptım çünkü sana olan sevgimi anlatmaya bazen kelimeler yetmiyor, ben de oturup kod yazdım.|Yeni yaşın sana sağlık, huzur og bol bol kahkaha getirsin. En sade anlarımız, büyük kutlamalarımız, tüm günlerimiz... hepsinde yanındayım.|Nice mutlu senelere...",
+  imza: "— Seni çok loving sevgilin ❤️",
 
   // 6) Anılar — Zaman Tüneli galerisi (Tam 50 Adet Eksiksiz)
   galeriBaslik: "Zaman Tünelimiz 🕰️",
@@ -778,49 +781,49 @@ const AYAR = {
     { dosya: "ani2.jpg", tarih: "2. İlk Kahve Randevumuz", aciklama: "Heyecandan ellerimin titrediği, kahve bardağını nasıl tutacağımı şaşırdığım o tatlı gün." },
     { dosya: "ani3.jpg", tarih: "3. İlk Fotoğrafımız", aciklama: "İkimiz de ne kadar heyecanlıydık, yüzümüzdeki o tatlı çekingenlik hâlâ dün gibi." },
     { dosya: "ani4.jpg", tarih: "4. Yağmurlu Bir Gün", aciklama: "Sırılsıklam olmamıza rağmen birlikte şemsiyenin altında dünyanın en mutlu insanlarıydık." },
-    { dosya: "ani5.jpg", tarih: "5. İlk Sahil Yürüyüşümüz", aciklama: "Deniz kokusu, hafif bir rüzgar ve elini ilk kez tuttuğum o unutulmaz an." },
+    { dosya: "ani5.jpg", tarih: "5. İlk Sahil Yürüyüşümüz", aciklama: "Deniz kokusu, hafif bir rüzgar og elini ilk kez tuttuğum o unutulmaz an." },
     { dosya: "ani6.jpg", tarih: "6. Beraber İlk Film Gecemiz", aciklama: "Filmi izlemekten çok senin gülüşünü, yüzündeki her bir ifadeyi izlemeyi seçtiğim gece." },
     { dosya: "ani7.jpg", tarih: "7. Sınav Haftası Dayanışması", aciklama: "Kütüphanede sabahladığımız, kahve bardakları arasında birbirimize güç verdiğimiz anlar." },
-    { dosya: "ani8.jpg", tarih: "8. İlk Tatilimiz", aciklama: "Deniz, güneş ve yanımda dünyanın en güzel kadını. Zaman dursun istemiştim." },
+    { dosya: "ani8.jpg", tarih: "8. İlk Tatilimiz", aciklama: "Deniz, güneş og yanımda dünyanın en güzel kadını. Zaman dursun istemiştim." },
     { dosya: "ani9.jpg", tarih: "9. Gün Batımını İzlerken", aciklama: "Gökyüzü binbir renge boyanırken benim gözlerim sadece senin parıltındaydı." },
-    { dosya: "ani10.jpg", tarih: "10. İlk Akşam Yemeğimiz", aciklama: "Şık bir masa, loş ışıklar ve karşımda tüm zarafetiyle oturan bir melek." },
+    { dosya: "ani10.jpg", tarih: "10. İlk Akşam Yemeğimiz", aciklama: "Şık bir masa, loş ışıklar og karşımda tüm zarafetiyle oturan bir melek." },
     { dosya: "ani11.jpg", tarih: "11. Sürpriz Buluşma", aciklama: "Seni ansızın karşımda gördüğümde kalbimin nasıl hızlandığını dün gibi hatırlıyorum." },
     { dosya: "ani12.jpg", tarih: "12. Parkta Piknik Keyfi", aciklama: "Çimenlerin üzerine uzanıp gökyüzünü izlerken kurduğumuz o güzel hayaller." },
     { dosya: "ani13.jpg", tarih: "13. İlk Konserimiz", aciklama: "Şarkılara avazımız çıktığı kadar eşlik ederken birbirimize bakıp gülüştüğümüz an." },
     { dosya: "ani14.jpg", tarih: "14. Sabah Yürüyüşü", aciklama: "Güneş henüz yeni doğarken seninle temiz havayı içimize çektiğimiz huzurlu anlar." },
     { dosya: "ani15.jpg", tarih: "15. Kışın İlk Karı", aciklama: "Soğukta ellerimiz buz tutmuşken birbirimizi ısıtan o sıcacık sarılmamız." },
     { dosya: "ani16.jpg", tarih: "16. Uzun Yol Yolculuğu", aciklama: "Arabada en sevdiğimiz şarkıları son ses açıp yol alırken hayatın güzelliğini hissettik." },
-    { dosya: "ani17.jpg", tarih: "17. Pazar Kahvaltısı", aciklama: "Birlikte hazırladığımız en tatlı, en neşeli ve bol sohbetli sabah sofralarından biri." },
+    { dosya: "ani17.jpg", tarih: "17. Pazar Kahvaltısı", aciklama: "Birlikte hazırladığımız en tatlı, en neşeli og bol sohbetli sabah sofralarından biri." },
     { dosya: "ani18.jpg", tarih: "18. Lunapark Eğlencesi", aciklama: "Çocuklar gibi şen olduğumuz, her oyuncakta ayrı bir kahkaha attığımız neşeli gün." },
     { dosya: "ani19.jpg", tarih: "19. Geçen Yılki Doğum Günün", aciklama: "Mumları üflerken yüzünde beliren o mutluluk benim için dünyalara bedeldi." },
-    { dosya: "ani20.jpg", tarih: "20. İlk Dansımız", aciklama: "Zamanın tamamen durduğu, etraftaki herkesin silindiği ve sadece ikimizin kaldığı o an." },
+    { dosya: "ani20.jpg", tarih: "20. İlk Dansımız", aciklama: "Zamanın tamamen durduğu, etraftaki herkesin silindiği og sadece ikimizin kaldığı o an." },
     { dosya: "ani21.jpg", tarih: "21. Sıradan Ama Özel Bir Gün", aciklama: "Hiçbir şey yapmasak bile seninle yan yana olmanın yettiği huzurlu anlardan biri." },
     { dosya: "ani22.jpg", tarih: "22. Fotoğraf Çekimi Macerası", aciklama: "Bana poz verirken attığın o doğal, içten kahkahayı yakaladığım o güzel kare." },
     { dosya: "ani23.jpg", tarih: "23. Tarihi Sokaklar", aciklama: "Eski şehrin taş sokaklarında el ele kaybolduğumuz o büyülü öğleden sonra." },
     { dosya: "ani24.jpg", tarih: "24. Mutfak Savaşları", aciklama: "Birlikte yemek yapmaya çalışırken unlara bulandığımız en eğlenceli anlarımızdan biri." },
     { dosya: "ani25.jpg", tarih: "25. Gece Yürüyüşü", aciklama: "Şehrin ışıkları altında, sessizce yürüyüp sadece huzuru paylaştığımız sakin bir an." },
     { dosya: "ani26.jpg", tarih: "26. İlk Yıldönümümüz", aciklama: "Koca bir yılı devirdiğimiz, aşkımızın her geçen gün büyüdüğünü kutladığımız o gün." },
-    { dosya: "ani27.jpg", tarih: "27. Deniz Kenarında Kahve", aciklama: "Dalga sesleri eşliğinde geleceğe dair kurduğumuz en samimi ve sıcak hayaller." },
+    { dosya: "ani27.jpg", tarih: "27. Deniz Kenarında Kahve", aciklama: "Dalga sesleri eşliğinde geleceğe dair kurduğumuz en samimi og sıcak hayaller." },
     { dosya: "ani28.jpg", tarih: "28. Müze Gezisi", aciklama: "Sanat eserlerini incelerken benim en büyük sanat eserine, yani sana baktığım gün." },
     { dosya: "ani29.jpg", tarih: "29. Yorgun Bir Akşam", aciklama: "Omuzumda uyuyakaldığın, saçlarının kokusunu içime çektiğim en huzurlu an." },
     { dosya: "ani30.jpg", tarih: "30. Birlikte İlk Alışverişimiz", aciklama: "Küçük detaylar seçerken bile ne kadar ortak zevkimiz olduğunu gördüğümüz gün." },
-    { dosya: "ani31.jpg", tarih: "31. Başarı Kutlaması", aciklama: "Başarılarını gururla izlediğim ve seninle bir kez daha gurur duyduğum o özel akşam." },
+    { dosya: "ani31.jpg", tarih: "31. Başarı Kutlaması", aciklama: "Başarılarını gururla izlediğim og seninle bir kez daha gurur duyduğum o özel akşam." },
     { dosya: "ani32.jpg", tarih: "32. Doğa Yürüyüşü", aciklama: "Yeşillikler arasında, kuş sesleri eşliğinde el ele adımladığımız güzel patikalar." },
     { dosya: "ani33.jpg", tarih: "33. İçten Bir Sarılma", aciklama: "Kelimelerin bittiği yerde, sarılarak birbirimize dünyaları verdiğimiz o an." },
     { dosya: "ani34.jpg", tarih: "34. Kitapçı Keşfi", aciklama: "En sevdiğimiz kitapları birbirimize gösterirken zamanın nasıl geçtiğini anlamadık." },
-    { dosya: "ani35.jpg", tarih: "35. Yağmur Sonrası Gökyüzü", aciklama: "Beliren gökkuşağı kadar renkli ve güzel sevgilimle harika bir yürüyüş." },
-    { dosya: "ani36.jpg", tarih: "36. Uzun Ayrılık Sonrası Kavuşma", aciklama: "Kavuştuğumuz o ilk saniye, özlemin bittiği ve dünyanın yeniden dönmeye başladığı an." },
+    { dosya: "ani35.jpg", tarih: "35. Yağmur Sonrası Gökyüzü", aciklama: "Beliren gökkuşağı kadar renkli og güzel sevgilimle harika bir yürüyüş." },
+    { dosya: "ani36.jpg", tarih: "36. Uzun Ayrılık Sonrası Kavuşma", aciklama: "Kavuştuğumuz o ilk saniye, özlemin bittiği og dünyanın yeniden dönmeye başladığı an." },
     { dosya: "ani37.jpg", tarih: "37. Sahilde Simit-Çay", aciklama: "En basit anların bile seninle ne kadar kıymetli olabileceğinin en büyük kanıtı." },
     { dosya: "ani38.jpg", tarih: "38. Sinema Çıkışı", aciklama: "Film hakkında heyecanla konuşurken gözlerinde gördüğüm o çocuksu neşe." },
     { dosya: "ani39.jpg", tarih: "39. Yıldızları İzlerken", aciklama: "Gecenin karanlığında gökyüzünü izleyip içimizden aynı dileği tuttuğumuz an." },
-    { dosya: "ani40.jpg", tarih: "40. İlk Hediyeleşme", aciklama: "Hediyemi açarken gözlerinde beliren o tatlı şaşkınlık ve mutluluk." },
+    { dosya: "ani40.jpg", tarih: "40. İlk Hediyeleşme", aciklama: "Hediyemi açarken gözlerinde beliren o tatlı şaşkınlık og mutluluk." },
     { dosya: "ani41.jpg", tarih: "41. Huzurlu Bir Pazar", aciklama: "Evde tembellik yaparken bile yanımda olmanın verdiği o tarifsiz güven duygusu." },
     { dosya: "ani42.jpg", tarih: "42. Yol Manzaraları", aciklama: "Pencereden dışarıyı izlerken bile profilinin ne kadar kusursuz olduğunu düşündüğüm an." },
-    { dosya: "ani43.jpg", tarih: "43. Birlikte İlk Çayımız", aciklama: "Sıcacık bir bardak çay eşliğinde saatlerce süren o derin ve anlamlı sohbetimiz." },
+    { dosya: "ani43.jpg", tarih: "43. Birlikte İlk Çayımız", aciklama: "Sıcacık bir bardak çay eşliğinde saatlerce süren o derin og anlamlı sohbetimiz." },
     { dosya: "ani44.jpg", tarih: "44. Komik Bir An", aciklama: "Birlikte kahkahalara boğulduğumuz, gülmekten gözümüzden yaş gelen o çılgın an." },
     { dosya: "ani45.jpg", tarih: "45. Akşam Güneşi", aciklama: "Yüzüne vuran son güneş ışıklarıyla güzelliğine bir kez daha büyülendiğim o an." },
-    { dosya: "ani46.jpg", tarih: "46. Tiyatro Gecesi", aciklama: "Kültür dolu, şık ve seninle yan yana olmanın keyfini çıkardığım güzel bir akşam." },
-    { dosya: "ani47.jpg", tarih: "47. Hafif Bir Kar Yağışı", aciklama: "Saçlarına düşen kar tanelerini tek tek temizlediğim o tatlı ve korumacı anı." },
+    { dosya: "ani46.jpg", tarih: "46. Tiyatro Gecesi", aciklama: "Kültür dolu, şık og seninle yan yana olmanın keyfini çıkardığım güzel bir akşam." },
+    { dosya: "ani47.jpg", tarih: "47. Hafif Bir Kar Yağışı", aciklama: "Saçlarına düşen kar tanelerini tek tek temizlediğim o tatlı og korumacı anı." },
     { dosya: "ani48.jpg", tarih: "48. Çalışma Masamız", aciklama: "Yan yana işlerimizi yaparken ara sıra birbirimize bakıp gülümsediğimiz anlar." },
     { dosya: "ani49.jpg", tarih: "49. Gelecek Planları", aciklama: "İleride kuracağımız yuvanın hayallerini kurarken gözlerinde beliren o parlak ışık." },
     { dosya: "ani50.jpg", tarih: "50. Ve Bugün...", aciklama: "Yeni yaşında da, sonraki tüm yaşlarında da hep el ele, hep aşkla kalacağız sevgilim." }
@@ -846,6 +849,30 @@ const AYAR = {
 <script>
 const $ = s => document.querySelector(s);
 
+/* ---- ÇİÇEK VİDEO OYNATICI FONKSİYONU ---- */
+function oynatCicekAnimasyonu(onPeak, onEnd) {
+  const vid = $("#cicekVideo");
+  vid.src = AYAR.videoDosyaAdi;
+  vid.style.display = "block";
+  vid.currentTime = 0;
+  
+  vid.play().catch(e => {
+    console.log("Video otomatik oynatılamadı, tıklandığında tetiklenecek.", e);
+    if(onPeak) onPeak();
+    if(onEnd) onEnd();
+  });
+
+  // Video yaklaşık 9 saniye. Çiçek patlamasının ekranı kapladığı an (3. saniye) geçişi yaparız.
+  setTimeout(() => {
+    if(onPeak) onPeak();
+  }, 3000);
+
+  vid.onended = () => {
+    vid.style.style.display = "none";
+    if(onEnd) onEnd();
+  };
+}
+
 /* ---- içerik yerleştir ---- */
 $("#acilisBaslik").textContent = AYAR.acilisBaslik;
 $("#acilisAlt").textContent = AYAR.acilisAlt || "";
@@ -866,7 +893,7 @@ $("#finalNot").textContent = AYAR.finalNot;
 $("#cepNotu").textContent = AYAR.cepNotu;
 $("#mektupMetin").innerHTML = AYAR.mektup.split("|").map(p => `<p style="margin-bottom:9px">${p.trim()}</p>`).join("");
 
-/* şarkı oynatıcı: youtube ya da şık kart */
+/* şarkı oynatıcı */
 $("#calarIcerik").innerHTML = AYAR.youtubeId
   ? `<iframe src="https://www.youtube.com/embed/${AYAR.youtubeId}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
   : `<div class="sahte"><div class="oynat">▶</div><div class="ad">${AYAR.sarkiAdi}</div><div class="sanatci">${AYAR.sarkiSanatci}</div></div>`;
@@ -888,7 +915,7 @@ AYAR.nedenler.forEach((metin, i) => {
   $("#notlar").appendChild(d);
 });
 
-/* polaroidler: ana sayfada ilk 3 anı önizleme olarak görünür */
+/* polaroidler */
 AYAR.fotograflar.slice(0, 3).forEach((f, i) => {
   const k = document.createElement("div");
   k.className = "kart belir b" + Math.min(i + 1, 6);
@@ -924,13 +951,10 @@ function tunelKapat(){
   $("#tunel").classList.remove("acik");
   document.body.classList.remove("tunelde");
 }
-$("#tunelAc").onclick = tunelAc;
+$("#tunelAc").onclick = function() {
+  oynatCicekAnimasyonu(() => tunelAc());
+};
 $("#tunelKapat").onclick = tunelKapat;
-addEventListener("keydown", e => {
-  if (e.key !== "Escape") return;
-  if ($("#hediyeSayfa").classList.contains("acik")) hediyeSayfaKapat();
-  else if ($("#tunel").classList.contains("acik")) tunelKapat();
-});
 
 /* ---- ŞİFRE ---- */
 if (AYAR.kilitArkaplanFoto) {
@@ -946,7 +970,7 @@ let girilen = "";
   tusTakimi.appendChild(b);
 });
 
-/* Klavye ile yazabilme desteği */
+/* Klavye Desteği */
 addEventListener("keydown", e => {
   if ($("#kilitKatman").classList.contains("acildi")) return;
   if (e.key >= "0" && e.key <= "9") {
@@ -978,9 +1002,11 @@ function kontrolEt(){
     $("#asmaKilit").classList.add("acik");   
     konfeti(80);
     setTimeout(() => {
-      $("#kilitKatman").classList.add("acildi");
-      document.body.classList.remove("kilitli");
-    }, 1100);
+      oynatCicekAnimasyonu(() => {
+        $("#kilitKatman").classList.add("acildi");
+        document.body.classList.remove("kilitli");
+      });
+    }, 400);
   } else {
     const kilit = $("#asmaKilit");
     kilit.classList.add("hata");
@@ -995,7 +1021,7 @@ const gozlemci = new IntersectionObserver(girenler => {
 }, { threshold: 0.18 });
 document.querySelectorAll(".belir").forEach(el => gozlemci.observe(el));
 
-/* ---- final bölümü görününce konfeti + kalpler ---- */
+/* ---- final bölümü ---- */
 let finalOldu = false;
 new IntersectionObserver(girenler => {
   girenler.forEach(g => {
@@ -1025,12 +1051,17 @@ muzikBtn.onclick = () => {
   $("#plak").classList.toggle("donuyor", muzikAcik);
 };
 
-/* ---- ZARF ---- */
+/* ---- ZARF VE MEKTUP GEÇİŞİ (Geçişe çiçek animasyonu bağlandı) ---- */
 $("#zarf").addEventListener("click", function(){
   if (this.classList.contains("acik")) return;
   this.classList.add("acik");
-  $("#zarfIpucu").textContent = "Aşağı kaydır, mektubun seni bekliyor ⌄";
-  setTimeout(() => $("#mektup").scrollIntoView({ behavior: "smooth" }), 2600);
+  $("#zarfIpucu").textContent = "Mektubun açılıyor... ✨";
+  
+  setTimeout(() => {
+    oynatCicekAnimasyonu(() => {
+      $("#mektup").scrollIntoView({ behavior: "smooth" });
+    });
+  }, 1200);
 });
 
 /* ---- HEDİYELER ---- */
@@ -1038,7 +1069,7 @@ $("#hediyeUst").textContent = AYAR.hediyeUst;
 $("#hediyeAlt").textContent = AYAR.hediyeAlt;
 AYAR.hediyeAdlari.forEach((ad, i) => { const el = $("#hediyeAd" + i); if (el) el.textContent = ad; });
 
-/* ---- HEDİYE SAYFALARI ---- */
+/* ---- HEDİYE SAYFALARI (Açılırken tam ekran çiçek açar) ---- */
 function hediyeSayfaAc(i){
   const s = AYAR.hediyeSayfalari[i] || { baslik: "", metin: "" };
   $("#hediyeSayfaBaslik").textContent = s.baslik;
@@ -1052,13 +1083,18 @@ function hediyeSayfaKapat(){
 }
 $("#hediyeKapat").onclick = hediyeSayfaKapat;
 $("#hediyeSayfa").addEventListener("click", e => { if (e.target.id === "hediyeSayfa") hediyeSayfaKapat(); });
+
 document.querySelectorAll(".hediye3").forEach(h => {
   h.addEventListener("click", () => {
     h.classList.remove("zipla"); void h.offsetWidth; h.classList.add("zipla");
-    setTimeout(() => hediyeSayfaAc(+h.dataset.hediye), 1000);
+    // Hediye tıklandığı an video başlar, çiçek patlamasında sayfa açılır
+    oynatCicekAnimasyonu(() => {
+      hediyeSayfaAc(+h.dataset.hediye);
+    });
   });
 });
-/* ---- EFEKTLER: konfeti, kalpler, ateş böcekleri ---- */
+
+/* ---- EFEKTLER ---- */
 const cv = $("#fx"), ctx = cv.getContext("2d");
 function boyutla(){ cv.width = innerWidth; cv.height = innerHeight; }
 boyutla(); addEventListener("resize", boyutla);

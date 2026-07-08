@@ -378,6 +378,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
 </head>
 <body class="kilitli cimenli">
 
+<!-- kalp şekli için svg clip -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <clipPath id="kalpKlip" clipPathUnits="objectBoundingBox">
@@ -386,6 +387,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   </defs>
 </svg>
 
+<!-- ============ KİLİT ============ -->
 <div id="kilitKatman">
   <video id="kilitVideo" autoplay loop muted playsinline style="display:none; position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;"></video>
   <div class="perde" style="position:absolute;inset:0;background:rgba(8,20,11,.65);backdrop-filter:blur(6px);z-index:2;"></div>
@@ -407,8 +409,10 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   </div>
 </div>
 
+<!-- ============ LALE ANİMASYONU KATMANI ============ -->
 <div class="lale-katman" id="laleKatman"></div>
 
+<!-- ============ 1. PİKNİK SERME ============ -->
 <section class="bolum" id="giris">
   <svg class="kavis belir" viewBox="0 0 560 150">
     <defs><path id="yay" d="M 16 128 Q 280 14 544 128"/></defs>
@@ -438,6 +442,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b4">⌄</div>
 </section>
 
+<!-- ============ 2. ŞARKI ============ -->
 <section class="bolum" id="sarki">
   <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)">Bana seni hatırlatan şarkı</div>
   <div class="sarki-duzen">
@@ -461,6 +466,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b3">⌄</div>
 </section>
 
+<!-- ============ 3. KALP MADALYON ============ -->
 <section class="bolum" id="madalyon">
   <div class="zemin potikare dikisli belir">
     <span class="madalyon-cicek" style="left:8px;top:-16px">🌻</span>
@@ -482,6 +488,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b4">⌄</div>
 </section>
 
+<!-- ============ 4. ZARF ============ -->
 <section class="bolum" id="zarfBolum">
   <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)" id="zarfBaslik"></div>
   <div class="zarf-ortu potikare dikisli belir b1">
@@ -499,6 +506,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b3">⌄</div>
 </section>
 
+<!-- ============ 5. MEKTUP ============ -->
 <section class="bolum" id="mektup">
   <div class="mektup-kagit belir">
     <span class="kose" style="left:-12px;top:-14px">🌼</span>
@@ -511,12 +519,14 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b2" style="color:var(--krem)">⌄</div>
 </section>
 
+<!-- ============ 6. POLAROİDLER ============ -->
 <section class="bolum" id="anilar">
   <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)">Anılarımız</div>
   <div class="polaroidler" id="polaroidler"></div>
   <div class="ok belir b5" style="color:var(--krem)">⌄</div>
 </section>
 
+<!-- ============ 7. MANTAR PANO / FİNAL ============ -->
 <section class="bolum" id="final">
   <div class="pano belir">
     <span class="yildiz" style="left:16px;top:14px">★</span>
@@ -543,7 +553,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
 const AYAR = {
   sifre: "2407",
   sifreIpucu: "İpucu: bizim için önemli bir tarih 😉",
-  kilitArkaplanVideo: "video.mp4", // OYNATILACAK VİDEONUN ADI BURAYA
+  kilitArkaplanVideo: "Gemini_generated_video_B47FF8D8.mp4", // OYNATILACAK VİDEONUN ADI BURAYA
 
   // 1) Giriş
   kavisYazi: "PİKNİK RANDEVUSU",

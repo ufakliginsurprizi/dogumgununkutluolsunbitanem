@@ -435,7 +435,7 @@ body.tunelde{overflow:hidden;height:100svh}
 }
 .dantel::after{content:"";position:absolute;inset:13px;border:1.5px dashed rgba(126,42,32,.5);border-radius:12px;pointer-events:none}
 .dantel-ust{font-family:'Pinyon Script',cursive;font-size:clamp(1.7rem,6.5vw,2.3rem);color:var(--kirmizi)}
-.dantel-alt{font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--kirmizi);margin-top:14px}
+.dantel-alt{font-family:'Pinyon Script',cursive;font-size:clamp(2 Basin,8vw,3rem);color:var(--kirmizi);margin-top:14px}
 .hediye-sira{display:flex;justify-content:center;align-items:flex-end;gap:clamp(16px,5vw,46px);flex-wrap:wrap;margin-top:30px}
 .hediye3{
   position:relative;display:flex;flex-direction:column;align-items:center;gap:11px;
@@ -544,6 +544,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
 </head>
 <body class="kilitli cimenli">
 
+<!-- küt şekli için svg clip -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <clipPath id="kalpKlip" clipPathUnits="objectBoundingBox">
@@ -552,6 +553,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   </defs>
 </svg>
 
+<!-- ============ KİLİT ============ -->
 <div id="kilitKatman">
   <div class="fon" id="kilitFon"></div>
   <div class="perde"></div>
@@ -570,6 +572,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <p class="ipucu" id="sifreIpucu"></p>
 </div>
 
+<!-- ============ 0. AÇILIŞ ============ -->
 <section class="bolum" id="acilis">
   <div class="acilis-fon" id="acilisFon"></div>
   <div class="acilis-perde"></div>
@@ -578,6 +581,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok">⌄</div>
 </section>
 
+<!-- ============ 1. PİKNİK SERME ============ -->
 <section class="bolum" id="giris">
   <svg class="kavis belir" viewBox="0 0 560 150">
     <defs><path id="yay" d="M 16 128 Q 280 14 544 128"/></defs>
@@ -607,6 +611,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b4">⌄</div>
 </section>
 
+<!-- ============ 2. ŞARKI ============ -->
 <section class="bolum" id="sarki">
   <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)">Bana seni hatırlatan şarkı</div>
   <div class="sarki-duzen">
@@ -630,6 +635,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b3">⌄</div>
 </section>
 
+<!-- ============ 3. KALP MADALYON ============ -->
 <section class="bolum" id="madalyon">
   <div class="zemin potikare dikisli belir">
     <span class="madalyon-cicek" style="left:8px;top:-16px">🌻</span>
@@ -651,6 +657,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b4">⌄</div>
 </section>
 
+<!-- ============ 4. ZARF ============ -->
 <section class="bolum" id="zarfBolum">
   <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)" id="zarfBaslik"></div>
   <div class="zarf-ortu potikare dikisli belir b1">
@@ -668,6 +675,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b3">⌄</div>
 </section>
 
+<!-- ============ 5. MEKTUP ============ -->
 <section class="bolum" id="mektup">
   <div class="mektup-kagit belir">
     <span class="kose" style="left:-12px;top:-14px">🌼</span>
@@ -680,6 +688,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b2" style="color:var(--krem)">⌄</div>
 </section>
 
+<!-- ============ 6. POLAROİDLER ============ -->
 <section class="bolum" id="anilar">
   <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)">Anılarımız</div>
   <div class="polaroidler" id="polaroidler"></div>
@@ -687,6 +696,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b5" style="color:var(--krem)">⌄</div>
 </section>
 
+<!-- ============ 8. HEDİYELER (dantel) ============ -->
 <section class="bolum" id="hediyeler">
   <div class="dantel belir">
     <div class="dantel-ust" id="hediyeUst"></div>
@@ -724,6 +734,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <p class="ipucu belir b4">Hediyelere dokun 🌷</p>
 </section>
 
+<!-- ============ ZAMAN TÜNELİ GALERİSİ ============ -->
 <div class="tunel" id="tunel">
   <div class="tunel-ust">
     <h2 id="tunelBaslik"></h2>
@@ -732,6 +743,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="tunel-icerik" id="tunelIcerik"></div>
 </div>
 
+<!-- ============ 7. MANTAR PANO / FİNAL ============ -->
 <section class="bolum" id="final">
   <div class="pano belir">
     <span class="yildiz" style="left:16px;top:14px">★</span>
@@ -845,7 +857,7 @@ const AYAR = {
     { dosya: "ani33.jpg", tarih: "33. İçten Bir Sarılma", aciklama: "Kelimelerin bittiği yerde, sarılarak birbirimize dünyaları verdiğimiz o an." },
     { dosya: "ani34.jpg", tarih: "34. Kitapçı Keşfi", aciklama: "En sevdiğimiz kitapları birbirimize gösterirken zamanın nasıl geçtiğini anlamadık." },
     { dosya: "ani35.jpg", tarih: "35. Yağmur Sonrası Gökyüzü", aciklama: "Beliren gökkuşağı kadar renkli ve güzel sevgilimle harika bir yürüyüş." },
-    { dosya: "ani36.jpg", tarih: "36. Uzun Ayrılık Sonrası Kavuşma", aciklama: "Kavuştuğumuz o ilk saniye, özlemin bittiği ve dünyanın yeniden döndmeye başladığı an." },
+    { dosya: "ani36.jpg", tarih: "36. Uzun Ayrılık Sonrası Kavuşma", aciklama: "Kavuştuğumuz o ilk saniye, özlemin bittiği ve dünyanın yeniden dönmeye başladığı an." },
     { dosya: "ani37.jpg", tarih: "37. Sahilde Simit-Çay", aciklama: "En basit anların bile seninle ne kadar kıymetli olabileceğinin en büyük kanıtı." },
     { dosya: "ani38.jpg", tarih: "38. Sinema Çıkışı", aciklama: "Film hakkında heyecanla konuşurken gözlerinde gördüğüm o çocuksu neşe." },
     { dosya: "ani39.jpg", tarih: "39. Yıldızları İzlerken", aciklama: "Gecenin karanlığında gökyüzünü izleyip içimizden aynı dileği tuttuğumuz an." },
@@ -859,7 +871,7 @@ const AYAR = {
     { dosya: "ani47.jpg", tarih: "47. Hafif Bir Kar Yağışı", aciklama: "Saçlarına düşen kar tanelerini tek tek temizlediğim o tatlı ve korumacı anı." },
     { dosya: "ani48.jpg", tarih: "48. Çalışma Masamız", aciklama: "Yan yana işlerimizi yaparken ara sıra birbirimize bakıp gülümsediğimiz anlar." },
     { dosya: "ani49.jpg", tarih: "49. Gelecek Planları", aciklama: "İleride kuracağımız yuvanın hayallerini kurarken gözlerinde beliren o parlak ışık." },
-    { dosya: "ani50.jpg", tarih: "50. Ve Bugün...", aciklama: "Yeni yaşında da, sonraki tüm yaşlarında da hep el ele, hep aşkla kalacağız sevgilim." bias: "Beyza" }
+    { dosya: "ani50.jpg", tarih: "50. Ve Bugün...", aciklama: "Yeni yaşında da, sonraki tüm yaşlarında da hep el ele, hep aşkla kalacağız sevgilim." }
   ],
 
   // 7) Final panosu
@@ -982,6 +994,19 @@ let girilen = "";
   b.onclick = () => tusBas(t);
   tusTakimi.appendChild(b);
 });
+
+/* Klavye ile yazabilme desteği */
+addEventListener("keydown", e => {
+  if ($("#kilitKatman").classList.contains("acildi")) return;
+  if (e.key >= "0" && e.key <= "9") {
+    tusBas(parseInt(e.key));
+  } else if (e.key === "Backspace") {
+    tusBas("sil");
+  } else if (e.key === "Enter") {
+    tusBas("tamam");
+  }
+});
+
 function haneGuncelle(){
   document.querySelectorAll(".hane").forEach((h, i) => {
     h.textContent = girilen[i] || "";
@@ -1205,7 +1230,7 @@ function dongu(){
       ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*.6); ctx.restore();
     } else {
       p.x += p.vx + Math.sin(p.y*.02)*.6; p.y += p.vy; p.omur -= .003;
-      kalpCiz(p.x, p.y, r, Math.max(p.omur, 0), p.renk);
+      kalpCiz(p.x, p.y, p.r, Math.max(p.omur, 0), p.renk);
     }
   }
   requestAnimationFrame(dongu);

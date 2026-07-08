@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piknik Randevusu 🧺</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat:wght@500;700&family=Pinyon+Script&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cimen-koyu:#0e2213;
+  --cimen:#1e3d24;
+  --cimen-acik:#2f5233;
+  --kirmizi:#a63a2e;
+  --kirmizi-koyu:#7e2a20;
+  --bordo:#5e1d16;
+  --krem:#faf3e3;
+  --kagit:#fffdf6;
+  --gunes:#e9b64c;
+  --murekkep:#3f3428;
+  --mantar:#c89b66;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Quicksand',sans-serif;color:var(--krem);
+  background:linear-gradient(180deg,var(--cimen-koyu),var(--cimen) 40%,var(--cimen-acik) 120%);
+  overflow-x:hidden;
+}
+body.kilitli{overflow:hidden;height:100svh}
+/* çimen dokusu */
+.cimenli{position:relative}
+.cimenli::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.15;
+  background:repeating-linear-gradient(88deg, transparent 0 7px, rgba(15,45,20,.9) 7px 8px),
+             repeating-linear-gradient(92deg, transparent 0 11px, rgba(90,140,85,.35) 11px 12px);
+}
+.bolum{
+  position:relative;min-height:100svh;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:70px 20px;gap:22px;text-align:center;
+}
+.el{font-family:'Caveat',cursive;font-weight:700}
+.zarif{font-family:'Pinyon Script',cursive;font-weight:400}
+.altbaslik{font-family:'Caveat',cursive;font-size:clamp(1.4rem,5vw,2rem);color:var(--gunes)}
+p{font-size:clamp(.95rem,3.6vw,1.08rem);max-width:560px;line-height:1.75;opacity:.93}
+.ipucu{font-size:.78rem;opacity:.55;letter-spacing:1.2px;text-transform:uppercase}
+.ok{font-size:1.5rem;opacity:.6;animation:zipla 1.8s ease-in-out infinite}
+@keyframes zipla{0%,100%{transform:translateY(0)}50%{transform:translateY(9px)}}
+
+/* kaydırınca belirme sistemi */
+.belir{opacity:0;transform:translateY(36px);transition:opacity .9s ease, transform .9s cubic-bezier(.22,.9,.3,1)}
+.belir.g{opacity:1;transform:translateY(0)}
+.belir.soldan{transform:translateX(-46px)}
+.belir.sagdan{transform:translateX(46px)}
+.belir.soldan.g,.belir.sagdan.g{transform:translateX(0)}
+.b1{transition-delay:.08s}.b2{transition-delay:.2s}.b3{transition-delay:.34s}.b4{transition-delay:.48s}.b5{transition-delay:.62s}.b6{transition-delay:.76s}
+
+/* pötikare */
+.potikare{
+  background:
+    repeating-linear-gradient(0deg, rgba(166,58,46,.5) 0 16px, transparent 16px 32px),
+    repeating-linear-gradient(90deg, rgba(166,58,46,.5) 0 16px, transparent 16px 32px),
+    var(--krem);
+}
+.dikisli{position:relative}
+.dikisli::after{content:"";position:absolute;inset:7px;border:2px dashed rgba(126,42,32,.5);border-radius:inherit;pointer-events:none}
+
+/* ============ KİLİT EKRANI (sabit katman) ============ */
+#kilitKatman{
+  position:fixed;inset:0;z-index:100;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+  background:
+    radial-gradient(ellipse at 50% -20%, rgba(233,182,76,.10), transparent 55%),
+    linear-gradient(180deg, var(--cimen-koyu), var(--cimen));
+  transition:opacity .9s ease, visibility .9s;
+  padding:24px;text-align:center;
+}
+#kilitKatman.acildi{opacity:0;visibility:hidden}
+.kilit-baslik{font-family:'Pinyon Script',cursive;font-size:clamp(2.2rem,9vw,3.4rem);text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.kilit{
+  width:min(330px,88vw);border-radius:26px;padding:28px 24px 24px;
+  background:linear-gradient(180deg, rgba(250,243,227,.10), rgba(250,243,227,.05));
+  border:1px solid rgba(250,243,227,.22);backdrop-filter:blur(10px);
+  box-shadow:0 28px 70px rgba(0,0,0,.55);
+  display:flex;flex-direction:column;align-items:center;gap:17px;
+}
+.kilit-ust{font-size:.95rem;opacity:.85}
+.nokta-sira{display:flex;gap:16px;height:16px}
+.snokta{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(250,243,227,.7);transition:all .2s}
+.snokta.dolu{background:var(--gunes);border-color:var(--gunes);box-shadow:0 0 12px rgba(233,182,76,.7)}
+.tus-takimi{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tus{
+  width:62px;height:62px;border-radius:50%;cursor:pointer;color:var(--krem);
+  font-size:1.4rem;font-weight:500;font-family:'Quicksand',sans-serif;
+  background:rgba(250,243,227,.09);border:1px solid rgba(250,243,227,.22);
+  transition:background .15s, transform .1s;
+}
+.tus:active{background:rgba(233,182,76,.3);transform:scale(.92)}
+.tus.yardimci{font-size:1rem;background:transparent;border-color:transparent}
+.kilit.hata{animation:salla .45s ease}
+@keyframes salla{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-11px)}40%,80%{transform:translateX(11px)}}
+#sifreMesaj{font-size:.85rem;min-height:1.2em;color:var(--gunes)}
+
+/* ============ 1. BÖLÜM: PİKNİK SERME ============ */
+.kavis{width:min(560px,94vw);margin-bottom:-26px}
+.kavis text{font-family:'Alfa Slab One',serif;font-size:42px;fill:var(--krem);letter-spacing:1px}
+.kavis .golge{fill:rgba(0,0,0,.35);transform:translate(2px,3px)}
+.serme{
+  position:relative;width:min(620px,94vw);border-radius:10px;
+  padding:clamp(22px,5vw,40px);
+  transform:rotate(-1.2deg);
+  box-shadow:0 30px 70px rgba(0,0,0,.55);
+}
+.serme-ic{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(10px,3vw,24px)}
+.sepet-buyuk{font-size:clamp(4.4rem,17vw,7rem);filter:drop-shadow(0 12px 20px rgba(0,0,0,.35));transform:rotate(-3deg)}
+.meyve{position:absolute;font-size:1.5rem;filter:drop-shadow(0 4px 6px rgba(0,0,0,.3))}
+.cicek-sol{position:absolute;left:-8px;top:-14px;font-size:2.2rem;transform:rotate(-20deg)}
+.cicek-sag{position:absolute;right:-6px;bottom:-12px;font-size:2rem;transform:rotate(15deg)}
+
+/* kaset */
+.kaset{
+  position:relative;width:150px;height:94px;border-radius:8px;transform:rotate(4deg);
+  background:linear-gradient(170deg,#2b2b2b,#151515);
+  box-shadow:0 10px 24px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.15);
+  flex-shrink:0;
+}
+.kaset .etiket{
+  position:absolute;left:10px;right:10px;top:9px;height:46px;border-radius:4px;
+  background:linear-gradient(180deg,var(--krem),#efe4c8);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Caveat',cursive;font-size:1.05rem;color:var(--kirmizi);font-weight:700;
+}
+.kaset .etiket::before{content:"";position:absolute;top:5px;left:8px;right:8px;height:3px;background:repeating-linear-gradient(90deg,var(--kirmizi) 0 8px,transparent 8px 14px);opacity:.5}
+.kaset .makara{position:absolute;bottom:12px;width:26px;height:26px;border-radius:50%;background:radial-gradient(circle,#0a0a0a 34%,#3a3a3a 36% 60%,#0a0a0a 62%);border:2px solid #444}
+.kaset .makara.m1{left:26px}.kaset .makara.m2{right:26px}
+.kaset .vida{position:absolute;width:5px;height:5px;border-radius:50%;background:#555}
+.kaset .vida:nth-of-type(4){left:5px;top:5px}.kaset .vida:nth-of-type(5){right:5px;top:5px}
+.kaset .vida:nth-of-type(6){left:5px;bottom:5px}.kaset .vida:nth-of-type(7){right:5px;bottom:5px}
+
+/* fotoğraf makinesi */
+.makine{
+  position:relative;width:132px;height:88px;border-radius:12px;transform:rotate(-5deg);flex-shrink:0;
+  background:linear-gradient(180deg,#8a6f52 0 34%, #3b3128 34%);
+  box-shadow:0 10px 24px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.2);
+}
+.makine .objektif{
+  position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);
+  width:52px;height:52px;border-radius:50%;
+  background:radial-gradient(circle at 38% 34%, #7fa3b5 6%, #23404e 40%, #0d1b22 70%);
+  border:5px solid #d9cfc0;box-shadow:0 3px 8px rgba(0,0,0,.4);
+}
+.makine .vizor{position:absolute;left:12px;top:7px;width:22px;height:13px;border-radius:3px;background:#1c1712;border:2px solid #d9cfc0}
+.makine .flas{position:absolute;right:14px;top:8px;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #fff8e0, #b3a37a)}
+.makine .dugme{position:absolute;right:26px;top:-7px;width:18px;height:9px;border-radius:3px;background:#c2402f}
+
+/* mini zarf (sermede duran) */
+.mini-zarf{
+  position:relative;width:118px;height:80px;transform:rotate(6deg);flex-shrink:0;
+  background:linear-gradient(170deg,#b5473a,var(--kirmizi-koyu));border-radius:6px;
+  box-shadow:0 10px 24px rgba(0,0,0,.4);
+}
+.mini-zarf::before{content:"";position:absolute;inset:0;clip-path:polygon(0 0, 50% 52%, 100% 0);background:#c6584a;border-radius:6px 6px 0 0}
+.mini-zarf .pul{position:absolute;left:50%;top:34px;transform:translateX(-50%);font-size:1.15rem}
+
+/* ============ 2. BÖLÜM: ŞARKI ============ */
+#sarki{background:linear-gradient(180deg, rgba(10,22,12,.55), rgba(10,22,12,.75)), var(--cimen-koyu)}
+.sarki-duzen{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:clamp(24px,5vw,54px);width:min(860px,94vw)}
+.plak-kutu{position:relative}
+.plak{
+  width:min(240px,62vw);aspect-ratio:1;border-radius:50%;position:relative;cursor:pointer;
+  background:repeating-radial-gradient(circle, #171411 0 2.4px, #262119 2.4px 4.4px);
+  box-shadow:0 22px 48px rgba(0,0,0,.65), inset 0 0 26px rgba(0,0,0,.85);
+  animation:don 5s linear infinite;animation-play-state:paused;
+}
+.plak.donuyor{animation-play-state:running}
+@keyframes don{to{transform:rotate(360deg)}}
+.plak .orta{
+  position:absolute;inset:30%;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #c6584a, var(--kirmizi) 60%, var(--kirmizi-koyu));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Caveat',cursive;font-size:1rem;color:var(--krem);line-height:1.15;padding:10px;
+}
+.plak .delik{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:var(--cimen-koyu)}
+.plak-alt{margin-top:14px;font-family:'Caveat',cursive;font-size:1.3rem;color:var(--gunes)}
+.calar{
+  width:min(420px,90vw);border-radius:12px;overflow:hidden;
+  background:#101010;border:6px solid var(--krem);
+  box-shadow:0 22px 50px rgba(0,0,0,.6);
+  transform:rotate(1.2deg);
+}
+.calar .ust-serit{display:flex;align-items:center;gap:8px;background:var(--krem);padding:8px 12px;color:var(--murekkep);font-family:'Caveat',cursive;font-size:1.15rem;text-align:left}
+.calar .ust-serit .yuvarlak{width:10px;height:10px;border-radius:50%}
+.calar iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.calar .sahte{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:radial-gradient(circle at 50% 40%, #232323, #0c0c0c)}
+.calar .sahte .oynat{width:64px;height:64px;border-radius:50%;background:var(--kirmizi);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--krem);box-shadow:0 8px 20px rgba(0,0,0,.5)}
+.calar .sahte .ad{font-family:'Caveat',cursive;font-size:1.5rem;color:var(--krem)}
+.calar .sahte .sanatci{font-size:.85rem;opacity:.65}
+
+/* ============ 3. BÖLÜM: KALP MADALYON + NEDENLER ============ */
+#madalyon .zemin{
+  position:relative;width:min(720px,94vw);border-radius:10px;
+  padding:clamp(26px,6vw,52px) clamp(14px,4vw,40px);
+  transform:rotate(.8deg);box-shadow:0 30px 70px rgba(0,0,0,.55);
+}
+.kalpler{display:flex;justify-content:center;align-items:center;gap:6px;flex-wrap:wrap}
+.kalp-cerceve{position:relative;width:clamp(140px,38vw,190px);aspect-ratio:1;filter:drop-shadow(0 12px 22px rgba(0,0,0,.4))}
+.kalp-cerceve .altin{position:absolute;inset:0;clip-path:url(#kalpKlip);background:linear-gradient(140deg,#f0d48a,#c99b3f 55%,#a4762a)}
+.kalp-cerceve .ic{position:absolute;inset:7%;clip-path:url(#kalpKlip);background:var(--cimen);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.kalp-cerceve .ic img{width:100%;height:100%;object-fit:cover}
+.kalp-cerceve .yertutucu{font-family:'Caveat',cursive;font-size:1.05rem;color:#cfe3c4;padding:20%}
+.zincir{font-size:1.3rem;letter-spacing:-2px;color:#c99b3f;text-shadow:0 2px 4px rgba(0,0,0,.35)}
+.madalyon-cicek{position:absolute;font-size:1.9rem;filter:drop-shadow(0 4px 8px rgba(0,0,0,.3))}
+.notlar{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:26px}
+.not{
+  position:relative;width:clamp(140px,42vw,168px);min-height:104px;padding:20px 13px 13px;
+  background:linear-gradient(170deg,#b5473a,var(--kirmizi));color:var(--krem);
+  font-family:'Caveat',cursive;font-size:1.18rem;line-height:1.25;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 22px rgba(0,0,0,.4);
+}
+.not::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%) rotate(-2deg);width:58px;height:18px;background:rgba(250,243,227,.55);box-shadow:inset 0 0 5px rgba(0,0,0,.12)}
+.not:nth-child(odd){transform:rotate(-2.4deg)}
+.not:nth-child(even){transform:rotate(2deg)}
+
+/* ============ 4. BÖLÜM: ZARF ============ */
+.zarf-ortu{position:relative;width:min(430px,92vw);padding:46px 22px 46px;border-radius:8px;transform:rotate(-1deg);box-shadow:0 28px 64px rgba(0,0,0,.55);display:flex;justify-content:center}
+.zarf{position:relative;width:230px;height:154px;cursor:pointer;transform:rotate(1.5deg);transition:transform .3s}
+.zarf:active{transform:rotate(1.5deg) scale(.97)}
+.zarf .arka{position:absolute;inset:0;background:linear-gradient(170deg,#b5473a,var(--kirmizi-koyu));border-radius:8px;box-shadow:0 14px 30px rgba(0,0,0,.45)}
+.zarf .mektupcuk{
+  position:absolute;left:11px;right:11px;top:9px;height:132px;background:var(--kagit);border-radius:4px;
+  display:flex;align-items:center;justify-content:center;z-index:1;
+  font-family:'Caveat',cursive;font-size:1.3rem;color:var(--kirmizi);
+  transition:transform .95s ease .55s;padding:10px;line-height:1.3;
+}
+.zarf .on{position:absolute;left:0;right:0;bottom:0;height:84px;z-index:2;background:linear-gradient(180deg,#c6584a,var(--kirmizi));border-radius:0 0 8px 8px;clip-path:polygon(0 0, 50% 46%, 100% 0, 100% 100%, 0 100%)}
+.zarf .kapak{
+  position:absolute;top:0;left:0;width:0;height:0;z-index:3;
+  border-left:115px solid transparent;border-right:115px solid transparent;
+  border-top:82px solid #d3695b;
+  transform-origin:top;transition:transform .7s ease;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.25));
+}
+.zarf .muhur{
+  position:absolute;top:62px;left:50%;transform:translateX(-50%);z-index:4;
+  width:48px;height:48px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #f0c96a, var(--gunes) 55%, #b07f24);
+  display:flex;align-items:center;justify-content:center;font-size:1.25rem;
+  box-shadow:0 3px 10px rgba(0,0,0,.4);transition:opacity .4s, transform .4s;
+}
+.zarf.acik .kapak{transform:rotateX(180deg);z-index:1}
+.zarf.acik .muhur{opacity:0;transform:translateX(-50%) scale(1.6)}
+.zarf.acik .mektupcuk{transform:translateY(-84px)}
+.papatya{position:absolute;font-size:1.7rem;filter:drop-shadow(0 4px 7px rgba(0,0,0,.3))}
+
+/* ============ 5. BÖLÜM: MEKTUP ============ */
+#mektup{background:linear-gradient(180deg,var(--bordo),#4a150f)}
+#mektup::before{content:"";position:absolute;inset:0;opacity:.25;pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(166,58,46,.55) 0 18px, transparent 18px 36px),
+             repeating-linear-gradient(90deg, rgba(166,58,46,.55) 0 18px, transparent 18px 36px)}
+.mektup-kagit{
+  position:relative;width:min(560px,92vw);
+  background:linear-gradient(165deg,#fffef9,var(--kagit));
+  color:var(--murekkep);border-radius:4px;padding:36px 30px 30px;text-align:left;
+  font-family:'Caveat',cursive;font-size:1.42rem;line-height:1.55;
+  box-shadow:0 26px 60px rgba(0,0,0,.6);transform:rotate(-1deg);
+}
+.mektup-kagit h3{font-family:'Pinyon Script',cursive;font-weight:400;font-size:clamp(1.9rem,7vw,2.6rem);color:var(--kirmizi);text-align:center;margin-bottom:16px}
+.mektup-kagit .imza{text-align:right;margin-top:16px;font-size:1.55rem;color:var(--kirmizi)}
+.mektup-kagit .kose{position:absolute;font-size:1.6rem}
+.mektup-kagit .opucuk{position:absolute;right:22px;bottom:-16px;font-size:2rem;transform:rotate(-14deg)}
+
+/* ============ 6. BÖLÜM: POLAROİDLER ============ */
+#anilar{background:linear-gradient(180deg,#4a150f,var(--bordo))}
+.polaroidler{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(14px,3.5vw,30px);max-width:1000px}
+.kart{
+  width:clamp(160px,42vw,210px);background:var(--kagit);border-radius:3px;
+  padding:11px 11px 0;box-shadow:0 16px 38px rgba(0,0,0,.5);
+  display:flex;flex-direction:column;position:relative;
+}
+.kart:nth-child(odd){transform:rotate(-2.6deg)}
+.kart:nth-child(even){transform:rotate(2.2deg)}
+.kart .foto{aspect-ratio:1;background:var(--cimen);border-radius:2px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.kart .foto img{width:100%;height:100%;object-fit:cover}
+.kart .yertutucu{font-family:'Caveat',cursive;font-size:1.15rem;color:#cfe3c4;padding:12px}
+.kart .altyazi{font-family:'Caveat',cursive;font-size:1.22rem;color:var(--murekkep);padding:9px 4px 12px;text-align:center}
+.kart::before{content:"";position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-2deg);width:82px;height:22px;background:rgba(233,182,76,.6);box-shadow:inset 0 0 6px rgba(0,0,0,.14)}
+
+/* ============ 7. BÖLÜM: MANTAR PANO ============ */
+.pano{
+  position:relative;width:min(620px,94vw);border-radius:14px;
+  padding:clamp(26px,6vw,46px) clamp(18px,5vw,40px);
+  background:
+    radial-gradient(circle at 22% 28%, rgba(90,60,30,.28) 0 2px, transparent 3px),
+    radial-gradient(circle at 68% 62%, rgba(90,60,30,.25) 0 2px, transparent 3px),
+    radial-gradient(circle at 44% 80%, rgba(90,60,30,.22) 0 2px, transparent 3px),
+    linear-gradient(165deg,#d3a873,var(--mantar));
+  background-size:52px 52px, 64px 64px, 58px 58px, 100% 100%;
+  border:12px solid #7a5230;
+  box-shadow:0 30px 70px rgba(0,0,0,.55), inset 0 0 40px rgba(80,50,20,.35);
+  transform:rotate(-.6deg);
+  display:flex;flex-direction:column;align-items:center;gap:20px;
+}
+.pano-not{
+  position:relative;background:var(--kagit);color:var(--murekkep);
+  font-family:'Caveat',cursive;font-size:clamp(1.25rem,4.6vw,1.5rem);line-height:1.45;
+  padding:24px 20px 18px;max-width:440px;box-shadow:0 10px 24px rgba(0,0,0,.35);
+  transform:rotate(1.4deg);
+}
+.pano-not::before{content:"📌";position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:1.5rem;filter:drop-shadow(0 3px 4px rgba(0,0,0,.3))}
+.pano .yildiz{position:absolute;color:var(--kirmizi);font-size:1.1rem;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3))}
+.cep{
+  position:relative;width:150px;height:118px;border-radius:8px 8px 16px 16px;transform:rotate(-2.5deg);
+  background:linear-gradient(170deg,#3f5c7a,#2c415a);
+  box-shadow:0 10px 24px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.15);
+}
+.cep::before{content:"";position:absolute;inset:8px;border:2px dashed rgba(233,196,120,.75);border-radius:6px 6px 12px 12px}
+.cep .kucuk-not{
+  position:absolute;left:50%;top:-24px;transform:translateX(-50%) rotate(3deg);
+  background:var(--kagit);color:var(--kirmizi);font-family:'Caveat',cursive;font-size:1rem;
+  padding:7px 12px;box-shadow:0 6px 14px rgba(0,0,0,.3);white-space:nowrap;
+}
+#finalBaslik{font-family:'Pinyon Script',cursive;font-size:clamp(2.8rem,12vw,4.6rem);background:linear-gradient(90deg,var(--krem),var(--gunes),var(--krem));background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:parla 4.5s linear infinite}
+@keyframes parla{to{background-position:200%}}
+
+canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
+.muzik-dugme{position:fixed;top:16px;right:16px;z-index:95;width:44px;height:44px;border-radius:50%;border:1px solid rgba(250,243,227,.3);background:rgba(14,34,19,.6);color:var(--krem);font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+@media (prefers-reduced-motion: reduce){
+  .plak,.ok{animation:none}
+  .belir{transition:none;opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="kilitli cimenli">
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <clipPath id="kalpKlip" clipPathUnits="objectBoundingBox">
+      <path d="M .5 .94 C .18 .70 .02 .48 .02 .30 C .02 .13 .16 .02 .30 .02 C .39 .02 .46 .07 .5 .14 C .54 .07 .61 .02 .70 .02 C .84 .02 .98 .13 .98 .30 C .98 .48 .82 .70 .5 .94 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<div id="kilitKatman">
+  <div class="kilit-baslik">Küçük bir sürprizim var</div>
+  <div class="kilit" id="kilitKart">
+    <div class="kilit-ust">🔒 Şifreyi gir</div>
+    <div class="nokta-sira">
+      <div class="snokta"></div><div class="snokta"></div><div class="snokta"></div><div class="snokta"></div>
+    </div>
+    <div class="tus-takimi" id="tusTakimi"></div>
+    <div id="sifreMesaj"></div>
+  </div>
+  <p class="ipucu" id="sifreIpucu"></p>
+</div>
+
+<section class="bolum" id="giris">
+  <svg class="kavis belir" viewBox="0 0 560 150">
+    <defs><path id="yay" d="M 16 128 Q 280 14 544 128"/></defs>
+    <text class="golge"><textPath href="#yay" startOffset="50%" text-anchor="middle" id="kavisGolge"></textPath></text>
+    <text><textPath href="#yay" startOffset="50%" text-anchor="middle" id="kavisYazi"></textPath></text>
+  </svg>
+  <div class="altbaslik belir b1" id="girisAlt"></div>
+  <div class="serme potikare dikisli belir b2">
+    <span class="cicek-sol">🌻</span><span class="cicek-sag">🌻</span>
+    <span class="meyve" style="left:12px;top:14px">🍎</span>
+    <span class="meyve" style="right:16px;top:18px">🍇</span>
+    <span class="meyve" style="left:20px;bottom:12px">🍓</span>
+    <div class="serme-ic">
+      <div class="kaset">
+        <div class="etiket" id="kasetEtiket">çalma listem ♡</div>
+        <div class="makara m1"></div><div class="makara m2"></div>
+        <span class="vida"></span><span class="vida"></span><span class="vida"></span><span class="vida"></span>
+      </div>
+      <div class="sepet-buyuk">🧺</div>
+      <div style="display:flex;flex-direction:column;gap:14px;align-items:center">
+        <div class="makine"><div class="dugme"></div><div class="vizor"></div><div class="flas"></div><div class="objektif"></div></div>
+        <div class="mini-zarf"><span class="pul">🌻</span></div>
+      </div>
+    </div>
+  </div>
+  <p class="belir b3" id="girisMetin"></p>
+  <div class="ok belir b4">⌄</div>
+</section>
+
+<section class="bolum" id="sarki">
+  <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)">Bana seni hatırlatan şarkı</div>
+  <div class="sarki-duzen">
+    <div class="plak-kutu belir soldan b1">
+      <div class="plak" id="plak">
+        <div class="orta" id="plakEtiket"></div>
+        <div class="delik"></div>
+      </div>
+      <div class="plak-alt" id="plakNot">Plağa dokun ▶</div>
+    </div>
+    <div class="calar belir sagdan b2">
+      <div class="ust-serit">
+        <span class="yuvarlak" style="background:#e05b4b"></span>
+        <span class="yuvarlak" style="background:#e9b64c"></span>
+        <span class="yuvarlak" style="background:#5f8f5a"></span>
+        <span id="calarBaslik" style="margin-left:6px"></span>
+      </div>
+      <div id="calarIcerik"></div>
+    </div>
+  </div>
+  <div class="ok belir b3">⌄</div>
+</section>
+
+<section class="bolum" id="madalyon">
+  <div class="zemin potikare dikisli belir">
+    <span class="madalyon-cicek" style="left:8px;top:-16px">🌻</span>
+    <span class="madalyon-cicek" style="right:12px;bottom:-14px;font-size:1.6rem">🌼</span>
+    <div class="altbaslik zarif belir b1" style="font-family:'Pinyon Script',cursive;font-size:clamp(1.9rem,7.5vw,2.7rem);color:var(--kirmizi-koyu);margin-bottom:18px">En sevdiğim insan</div>
+    <div class="kalpler">
+      <div class="kalp-cerceve belir soldan b2">
+        <div class="altin"></div>
+        <div class="ic" id="kalp1"></div>
+      </div>
+      <div class="zincir">•••••</div>
+      <div class="kalp-cerceve belir sagdan b2">
+        <div class="altin"></div>
+        <div class="ic" id="kalp2"></div>
+      </div>
+    </div>
+    <div class="notlar" id="notlar"></div>
+  </div>
+  <div class="ok belir b4">⌄</div>
+</section>
+
+<section class="bolum" id="zarfBolum">
+  <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)" id="zarfBaslik"></div>
+  <div class="zarf-ortu potikare dikisli belir b1">
+    <span class="papatya" style="left:10px;top:-14px">🌼</span>
+    <span class="papatya" style="right:14px;bottom:-12px">🌼</span>
+    <div class="zarf" id="zarf">
+      <div class="arka"></div>
+      <div class="mektupcuk" id="zarfNotu"></div>
+      <div class="on"></div>
+      <div class="kapak"></div>
+      <div class="muhur">🌻</div>
+    </div>
+  </div>
+  <p class="ipucu belir b2" id="zarfIpucu">Mühre dokun</p>
+  <div class="ok belir b3">⌄</div>
+</section>
+
+<section class="bolum" id="mektup">
+  <div class="mektup-kagit belir">
+    <span class="kose" style="left:-12px;top:-14px">🌼</span>
+    <span class="kose" style="right:-10px;top:-14px">🌼</span>
+    <h3 id="mektupBaslik"></h3>
+    <div id="mektupMetin"></div>
+    <div class="imza" id="imza"></div>
+    <span class="opucuk">💋</span>
+  </div>
+  <div class="ok belir b2" style="color:var(--krem)">⌄</div>
+</section>
+
+<section class="bolum" id="anilar">
+  <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)">Anılarımız</div>
+  <div class="polaroidler" id="polaroidler"></div>
+  <div class="ok belir b5" style="color:var(--krem)">⌄</div>
+</section>
+
+<section class="bolum" id="final">
+  <div class="pano belir">
+    <span class="yildiz" style="left:16px;top:14px">★</span>
+    <span class="yildiz" style="right:22px;top:22px">★</span>
+    <span class="yildiz" style="left:30px;bottom:20px">★</span>
+    <span class="yildiz" style="right:16px;bottom:34px">★</span>
+    <div id="finalBaslik">İyi ki doğdun!</div>
+    <div class="pano-not belir b2" id="finalNot"></div>
+    <div class="cep belir b3">
+      <div class="kucuk-not" id="cepNotu"></div>
+    </div>
+  </div>
+  <p class="ipucu belir b4">Ekrana dokun 💚</p>
+</section>
+
+<canvas id="fx"></canvas>
+<button class="muzik-dugme" id="muzikBtn">🔊</button>
+<audio id="muzik" loop></audio>
+
+<script>
+/* ==========================================================
+   ✏️ BURAYI DÜZENLE — tüm kişisel içerik bu bölümde
+   ========================================================== */
+const AYAR = {
+  sifre: "2407",
+  sifreIpucu: "İpucu: bizim için önemli bir tarih 😉",   // "" yaparsan görünmez
+
+  // 1) Giriş
+  kavisYazi: "PİKNİK RANDEVUSU",       // tepedeki kavisli büyük yazı
+  girisAlt: "benimle... 🧺",
+  girisMetin: "Bugün senin günün aşkım. Sana ekranda küçük bir piknik hazırladım; aşağı kaydır, her şey seni bekliyor.",
+  kasetEtiket: "çalma listem ♡",
+
+  // 2) Şarkı
+  sarkiAdi: "Bizim Şarkımız",
+  sarkiSanatci: "Sanatçı",
+  youtubeId: "",   // Örn: "dQw4w9WgXcQ" → YouTube videosu gömülür. Boşsa şık bir kart görünür
+  muzik: "",       // mp3 dosya adı (aynı klasöre koy) → plak dönerken çalar
+
+  // 3) Kalp madalyon
+  kalpFoto1: "",   // sol kalpteki fotoğraf dosya adı
+  kalpFoto2: "",   // sağ kalpteki fotoğraf dosya adı
+  nedenler: [
+    "Gülüşünü seviyorum, her şeyi güzelleştiriyor",
+    "Yanında kendim olabildiğim için seviyorum",
+    "Beni benden iyi tanıdığın için seviyorum",
+    "En kötü günümde bile yanımda olduğun için seviyorum"
+  ],
+
+  // 4) Zarf
+  zarfBaslik: "Sana bir şey yazdım",
+  zarfNotu: "Doğum günün kutlu olsun aşkım 🌻 Aşağı kaydır, mektubun orada...",
+
+  // 5) Mektup — paragrafları | ile ayır
+  mektupBaslik: "Doğum Günün Kutlu Olsun Aşkım!",
+  mektup: "Canım benim,|Bir yaş daha büyüdün ve ben hâlâ sana her baktığımda ilk günkü gibi heyecanlanıyorum. Bu siteyi senin için yaptım çünkü sana olan sevgimi anlatmaya kelimeler yetmiyor, ben de oturup kod yazdım.|Yeni yaşın sana sağlık, huzur ve bol bol kahkaha getirsin. En sade anlarımız, büyük kutlamalarımız, tüm günlerimiz... hepsinde yanındayım.|Nice mutlu senelere...",
+  imza: "— Seni çok loving sevgilin ❤️",
+
+  // 6) Polaroidler
+  fotograflar: [
+    { dosya: "", altyazi: "İlk fotoğrafımız 🥰" },
+    { dosya: "", altyazi: "En sevdiğim halin" },
+    { dosya: "", altyazi: "O gün çok güzeldin" }
+  ],
+
+  // 7) Final panosu
+  finalNot: "Umarım bu küçük sürpriz seni gülümsetmiştir. Her yaşında yanındayım. Seni çok seviyorum!",
+  cepNotu: "cebimde hep sen ♡"
+};
+/* ========================================================== */
+</script>
+
+<script>
+const $ = s => document.querySelector(s);
+
+/* ---- içerik yerleştir ---- */
+$("#kavisYazi").textContent = AYAR.kavisYazi;
+$("#kavisGolge").textContent = AYAR.kavisYazi;
+$("#girisAlt").textContent = AYAR.girisAlt;
+$("#girisMetin").textContent = AYAR.girisMetin;
+$("#kasetEtiket").textContent = AYAR.kasetEtiket;
+$("#sifreIpucu").textContent = AYAR.sifreIpucu || "";
+$("#plakEtiket").innerHTML = `<div><b>${AYAR.sarkiAdi}</b><br><span style="opacity:.85;font-size:.85em">${AYAR.sarkiSanatci}</span></div>`;
+$("#calarBaslik").textContent = "şarkımız.mp4";
+$("#zarfBaslik").textContent = AYAR.zarfBaslik;
+$("#zarfNotu").textContent = AYAR.zarfNotu;
+$("#mektupBaslik").textContent = AYAR.mektupBaslik;
+$("#imza").textContent = AYAR.imza;
+$("#finalNot").textContent = AYAR.finalNot;
+$("#cepNotu").textContent = AYAR.cepNotu;
+$("#mektupMetin").innerHTML = AYAR.mektup.split("|").map(p => `<p style="margin-bottom:9px">${p.trim()}</p>`).join("");
+
+/* şarkı oynatıcı: youtube ya da şık kart */
+$("#calarIcerik").innerHTML = AYAR.youtubeId
+  ? `<iframe src="https://www.youtube.com/embed/${AYAR.youtubeId}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+  : `<div class="sahte"><div class="oynat">▶</div><div class="ad">${AYAR.sarkiAdi}</div><div class="sanatci">${AYAR.sarkiSanatci}</div></div>`;
+
+/* kalp fotoğrafları */
+function kalpDoldur(hedef, dosya, no){
+  $(hedef).innerHTML = dosya
+    ? `<img src="${dosya}" alt="">`
+    : `<div class="yertutucu">Fotoğraf ${no} 💛</div>`;
+}
+kalpDoldur("#kalp1", AYAR.kalpFoto1, 1);
+kalpDoldur("#kalp2", AYAR.kalpFoto2, 2);
+
+/* neden notları */
+AYAR.nedenler.forEach((metin, i) => {
+  const d = document.createElement("div");
+  d.className = "not belir b" + Math.min(i + 3, 6);
+  d.textContent = metin;
+  $("#notlar").appendChild(d);
+});
+
+/* polaroidler */
+AYAR.fotograflar.forEach((f, i) => {
+  const k = document.createElement("div");
+  k.className = "kart belir b" + Math.min(i + 1, 6);
+  k.innerHTML = `<div class="foto">${f.dosya ? `<img src="${f.dosya}" alt="">` : `<div class="yertutucu">Buraya fotoğrafımız gelecek ❤️<br>(${i + 1})</div>`}</div>
+                 <div class="altyazi">${f.altyazi || ""}</div>`;
+  $("#polaroidler").appendChild(k);
+});
+
+/* ---- ŞİFRE ---- */
+const tusTakimi = $("#tusTakimi");
+let girilen = "";
+[1,2,3,4,5,6,7,8,9,"sil",0,"tamam"].forEach(t => {
+  const b = document.createElement("button");
+  b.className = "tus" + (typeof t === "string" ? " yardimci" : "");
+  b.textContent = t === "sil" ? "⌫" : (t === "tamam" ? "✓" : t);
+  b.onclick = () => tusBas(t);
+  tusTakimi.appendChild(b);
+});
+function noktaGuncelle(){
+  document.querySelectorAll(".snokta").forEach((n, i) => n.classList.toggle("dolu", i < girilen.length));
+}
+function tusBas(t){
+  const msj = $("#sifreMesaj");
+  if (t === "sil") { girilen = girilen.slice(0, -1); msj.textContent = ""; }
+  else if (t === "tamam") { if (girilen.length === 4) kontrolEt(); }
+  else if (girilen.length < 4) { girilen += t; msj.textContent = ""; }
+  noktaGuncelle();
+  if (girilen.length === 4 && t !== "tamam") setTimeout(kontrolEt, 250);
+}
+function kontrolEt(){
+  if (girilen === AYAR.sifre) {
+    $("#sifreMesaj").textContent = "Doğru! Hoş geldin 🌻";
+    konfeti(80);
+    setTimeout(() => {
+      $("#kilitKatman").classList.add("acildi");
+      document.body.classList.remove("kilitli");
+    }, 800);
+  } else {
+    const kart = $("#kilitKart");
+    kart.classList.add("hata");
+    $("#sifreMesaj").textContent = "Olmadı, bir daha dene 🙈";
+    setTimeout(() => { kart.classList.remove("hata"); girilen = ""; noktaGuncelle(); }, 500);
+  }
+}
+
+/* ---- kaydırınca belirme ---- */
+const gozlemci = new IntersectionObserver(girenler => {
+  girenler.forEach(g => { if (g.isIntersecting) g.target.classList.add("g"); });
+}, { threshold: 0.18 });
+document.querySelectorAll(".belir").forEach(el => gozlemci.observe(el));
+
+/* ---- final bölümü görününce konfeti + kalpler ---- */
+let finalOldu = false;
+new IntersectionObserver(girenler => {
+  girenler.forEach(g => {
+    if (g.isIntersecting && !finalOldu) {
+      finalOldu = true;
+      setTimeout(() => { konfeti(220); kalpModu = true; }, 500);
+    }
+  });
+}, { threshold: 0.4 }).observe($("#final"));
+
+/* ---- PLAK ---- */
+const muzik = $("#muzik"), muzikBtn = $("#muzikBtn");
+let muzikAcik = false;
+if (AYAR.muzik) muzik.src = AYAR.muzik;
+$("#plak").addEventListener("click", function(){
+  const donuyor = this.classList.toggle("donuyor");
+  $("#plakNot").textContent = donuyor ? "🎵 çalıyor..." : "Plağa dokun ▶";
+  if (AYAR.muzik) {
+    if (donuyor) { muzik.play().then(() => { muzikAcik = true; muzikBtn.style.display = "flex"; muzikBtn.textContent = "🔊"; }).catch(()=>{}); }
+    else { muzik.pause(); muzikAcik = false; muzikBtn.textContent = "🔇"; }
+  }
+});
+muzikBtn.onclick = () => {
+  muzikAcik = !muzikAcik;
+  muzikAcik ? muzik.play() : muzik.pause();
+  muzikBtn.textContent = muzikAcik ? "🔊" : "🔇";
+  $("#plak").classList.toggle("donuyor", muzikAcik);
+};
+
+/* ---- ZARF ---- */
+$("#zarf").addEventListener("click", function(){
+  if (this.classList.contains("acik")) return;
+  this.classList.add("acik");
+  $("#zarfIpucu").textContent = "Aşağı kaydır, mektubun seni bekliyor ⌄";
+  setTimeout(() => $("#mektup").scrollIntoView({ behavior: "smooth" }), 2600);
+});
+
+/* ---- EFEKTLER: konfeti, kalpler, ateş böcekleri ---- */
+const cv = $("#fx"), ctx = cv.getContext("2d");
+function boyutla(){ cv.width = innerWidth; cv.height = innerHeight; }
+boyutla(); addEventListener("resize", boyutla);
+let parcalar = [], kalpModu = false;
+for (let i = 0; i < 9; i++) parcalar.push({
+  tip:"f", x: Math.random()*innerWidth, y: Math.random()*innerHeight,
+  vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.28,
+  r: Math.random()*2.2+1.4, faz: Math.random()*Math.PI*2, omur: 1
+});
+const renkler = ["#e9b64c","#a63a2e","#faf3e3","#7fa377","#f0c96a","#c6584a"];
+function konfeti(adet){
+  for (let i = 0; i < adet; i++) parcalar.push({
+    tip:"k", x: cv.width/2, y: cv.height*0.4,
+    vx:(Math.random()-.5)*14, vy:(Math.random()*-13)-4,
+    r:Math.random()*6+3, a:Math.random()*Math.PI, va:(Math.random()-.5)*.3,
+    renk:renkler[Math.floor(Math.random()*renkler.length)], omur:1
+  });
+}
+function kalpEkle(x, y){
+  for (let i = 0; i < 6; i++) parcalar.push({
+    tip:"h", x:x+(Math.random()-.5)*40, y:y,
+    vx:(Math.random()-.5)*2, vy:-(Math.random()*2.5+1.5),
+    r:Math.random()*14+10, omur:1,
+    renk: Math.random() < .3 ? "#e9b64c" : "#c6584a"
+  });
+}
+addEventListener("pointerdown", e => { if (kalpModu) kalpEkle(e.clientX, e.clientY); });
+setInterval(() => { if (kalpModu && parcalar.length < 90) kalpEkle(Math.random()*cv.width, cv.height + 20); }, 450);
+function kalpCiz(x, y, r, alfa, renk){
+  ctx.save(); ctx.translate(x, y); ctx.scale(r/16, r/16);
+  ctx.globalAlpha = alfa; ctx.fillStyle = renk;
+  ctx.beginPath();
+  ctx.moveTo(0, 5);
+  ctx.bezierCurveTo(-8, -4, -16, 2, 0, 14);
+  ctx.bezierCurveTo(16, 2, 8, -4, 0, 5);
+  ctx.fill(); ctx.restore();
+}
+function dongu(){
+  ctx.clearRect(0, 0, cv.width, cv.height);
+  parcalar = parcalar.filter(p => p.tip === "f" || (p.omur > 0 && p.y < cv.height + 60 && p.y > -60));
+  for (const p of parcalar) {
+    if (p.tip === "f") {
+      p.faz += .02;
+      p.x += p.vx + Math.sin(p.faz)*.22; p.y += p.vy + Math.cos(p.faz*.8)*.18;
+      if (p.x < -20) p.x = cv.width+20; if (p.x > cv.width+20) p.x = -20;
+      if (p.y < -20) p.y = cv.height+20; if (p.y > cv.height+20) p.y = -20;
+      const isilti = .2 + Math.abs(Math.sin(p.faz*1.6))*.45;
+      ctx.save(); ctx.globalAlpha = isilti;
+      const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r*4);
+      g.addColorStop(0, "#f6d98a"); g.addColorStop(1, "transparent");
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r*4, 0, Math.PI*2); ctx.fill();
+      ctx.restore();
+    } else if (p.tip === "k") {
+      p.vy += .35; p.x += p.vx; p.y += p.vy; p.a += p.va; p.omur -= .004;
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.a);
+      ctx.globalAlpha = Math.max(p.omur, 0); ctx.fillStyle = p.renk;
+      ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*.6); ctx.restore();
+    } else {
+      p.x += p.vx + Math.sin(p.y*.02)*.6; p.y += p.vy; p.omur -= .003;
+      kalpCiz(p.x, p.y, p.r, Math.max(p.omur, 0), p.renk);
+    }
+  }
+  requestAnimationFrame(dongu);
+}
+dongu();
+</script>
+</body>
+</html>

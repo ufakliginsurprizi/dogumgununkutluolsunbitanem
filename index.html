@@ -330,13 +330,12 @@ p{font-size:clamp(.95rem,3.6vw,1.08rem);max-width:560px;line-height:1.75;opacity
 .mektup-kagit .opucuk{position:absolute;right:22px;bottom:-16px;font-size:2rem;transform:rotate(-14deg)}
 
 /* ============ 6. BÖLÜM: POLAROİDLER ============ */
-#anilar{background:linear-gradient(180deg,#4a150f,var(--bordo));overflow:hidden}
+#anilar{background:linear-gradient(180deg,#4a150f,var(--bordo))}
 .polaroidler{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(14px,3.5vw,30px);max-width:1000px}
 .kart{
   width:clamp(160px,42vw,210px);background:var(--kagit);border-radius:3px;
   padding:11px 11px 0;box-shadow:0 16px 38px rgba(0,0,0,.5);
   display:flex;flex-direction:column;position:relative;
-  will-change:transform;
 }
 .kart:nth-child(odd){transform:rotate(-2.6deg)}
 .kart:nth-child(even){transform:rotate(2.2deg)}
@@ -511,6 +510,7 @@ body.tunelde{overflow:hidden;height:100svh}
   72%  {transform:translate(-50%,-52%) scale(1) rotate(var(--r1));opacity:1}
   100% {transform:translate(-50%,-58%) scale(.9) rotate(var(--r0));opacity:0}
 }
+/* buket modu: hediye kartı süsündeki mini laleler .kart-laleleri kuralında */
 @media (prefers-reduced-motion: reduce){.cicek{animation-duration:.01s}}
 
 /* ============ HEDİYE SAYFASI (yazı modalı) ============ */
@@ -540,6 +540,102 @@ body.tunelde{overflow:hidden;height:100svh}
 .kart-laleleri{display:flex;justify-content:center;gap:4px;margin-top:16px}
 .kart-laleleri svg{width:30px;height:66px}
 
+/* ============ MİNİ ŞİFRE (anılar kilidi) ============ */
+.mini-sifre{
+  position:fixed;inset:0;z-index:140;display:none;
+  align-items:center;justify-content:center;padding:22px;
+  background:rgba(7,15,9,.66);backdrop-filter:blur(6px);
+}
+.mini-sifre.acik{display:flex}
+.msifre-kart{
+  width:min(320px,90vw);border-radius:22px;padding:24px 20px 20px;
+  background:linear-gradient(180deg, rgba(250,243,227,.12), rgba(250,243,227,.06));
+  border:1px solid rgba(250,243,227,.25);backdrop-filter:blur(10px);
+  box-shadow:0 26px 64px rgba(0,0,0,.6);
+  display:flex;flex-direction:column;align-items:center;gap:15px;text-align:center;
+}
+.msifre-kart.hata{animation:salla .45s ease}
+.msifre-baslik{font-family:'Pinyon Script',cursive;font-size:clamp(1.7rem,7vw,2.2rem);color:var(--krem)}
+.msifre-kart .haneler .hane{width:30px;height:40px;font-size:1.25rem}
+.msifre-kart .tus{width:56px;height:56px;font-size:1.3rem}
+.msifre-kart .tus-takimi{gap:11px}
+#msifreMesaj{font-size:.85rem;min-height:1.1em;color:var(--gunes)}
+.msifre-vazgec{background:none;border:none;color:rgba(250,243,227,.65);font-size:.85rem;cursor:pointer;text-decoration:underline;font-family:'Quicksand',sans-serif}
+
+/* ============ 2 YAŞ GALERİSİ + VİDEOLAR ============ */
+.izgara-icerik{
+  overflow-y:auto;flex:1;width:100%;
+  padding:28px clamp(14px,4vw,32px) 70px;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,86vw),1fr));
+  gap:26px 22px;align-items:start;max-width:1100px;margin:0 auto;
+}
+.sira-no{
+  position:absolute;top:-13px;left:-11px;z-index:1;
+  width:34px;height:34px;border-radius:50%;
+  background:linear-gradient(160deg,#7fa377,var(--cimen-acik));
+  color:var(--krem);font-family:'Quicksand',sans-serif;font-weight:600;font-size:.95rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 10px rgba(0,0,0,.35);
+}
+.video-kart{
+  position:relative;background:var(--kagit);border-radius:4px;
+  padding:12px 12px 14px;color:var(--murekkep);
+  box-shadow:0 14px 32px rgba(0,0,0,.45);
+}
+.video-kart:nth-child(odd){transform:rotate(-.9deg)}
+.video-kart:nth-child(even){transform:rotate(.8deg)}
+.video-kart::before{content:"";position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-2deg);width:84px;height:22px;background:rgba(166,58,46,.4);box-shadow:inset 0 0 6px rgba(0,0,0,.14)}
+.video-kart video{width:100%;aspect-ratio:16/9;border-radius:2px;background:#000;display:block}
+.video-kart .bos{aspect-ratio:16/9;border-radius:2px;background:var(--cimen);display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:1.3rem;color:#cfe3c4;padding:16px;text-align:center}
+.video-kart .yazi{font-family:'Caveat',cursive;font-size:1.3rem;line-height:1.35;color:var(--murekkep);padding:11px 2px 0}
+
+/* ============ MİNİ KİLİT (Zaman Tüneli şifresi) ============ */
+.mini-kilit-sayfa{
+  position:fixed;inset:0;z-index:130;display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  background:rgba(7,15,9,.72);backdrop-filter:blur(7px);padding:22px;text-align:center;
+}
+.mini-kilit-sayfa.acik{display:flex}
+.mini-kilit-sayfa .asma-kilit{transform:scale(.82)}
+.mini-kilit-sayfa .kapat{position:absolute;top:18px;right:18px}
+.mini-baslik{font-family:'Pinyon Script',cursive;font-size:clamp(1.8rem,7vw,2.5rem);text-shadow:0 2px 12px rgba(0,0,0,.6)}
+
+/* ============ "2 YAŞ BÜYÜK" BÖLÜMÜ ============ */
+.yas-baslik{
+  font-family:'Alfa Slab One',serif;font-size:clamp(1.35rem,5.6vw,2.5rem);line-height:1.3;
+  letter-spacing:2px;color:var(--krem);text-shadow:0 3px 0 rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.45);
+  max-width:16ch;
+}
+.yas-galeri{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(150px,42vw),1fr));
+  gap:16px 14px;width:min(920px,94vw);
+}
+.yas-kart{position:relative;background:var(--kagit);border-radius:3px;padding:8px 8px 9px;box-shadow:0 10px 24px rgba(0,0,0,.42)}
+.yas-kart:nth-child(odd){transform:rotate(-1.2deg)}
+.yas-kart:nth-child(even){transform:rotate(1deg)}
+.yas-kart img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:2px;background:var(--cimen);display:block}
+.yas-kart .bos{aspect-ratio:1;border-radius:2px;background:var(--cimen);display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:1.1rem;color:#cfe3c4;padding:8px;text-align:center}
+.yas-kart .no{
+  position:absolute;top:-9px;left:-8px;width:27px;height:27px;border-radius:50%;
+  background:var(--kirmizi);color:var(--krem);font-weight:600;font-size:.82rem;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 7px rgba(0,0,0,.35);
+}
+.yas-kart .yazi{font-family:'Caveat',cursive;font-size:1.12rem;color:var(--murekkep);padding-top:6px;min-height:0}
+
+/* ============ VİDEOLARIMIZ ============ */
+#videolar{background:linear-gradient(180deg,var(--cimen),#12301a)}
+.video-galeri{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,88vw),1fr));
+  gap:24px;width:min(980px,94vw);
+}
+.video-kart{position:relative;background:var(--kagit);border-radius:4px;padding:10px 10px 12px;box-shadow:0 14px 32px rgba(0,0,0,.45);color:var(--murekkep)}
+.video-kart:nth-child(odd){transform:rotate(-.8deg)}
+.video-kart:nth-child(even){transform:rotate(.7deg)}
+.video-kart::before{content:"";position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-2deg);width:84px;height:22px;background:rgba(233,182,76,.6);box-shadow:inset 0 0 6px rgba(0,0,0,.14)}
+.video-kart video{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:2px;background:#0d0d0d;display:block}
+.video-kart .bos{aspect-ratio:16/9;border-radius:2px;background:var(--cimen);display:flex;align-items:center;justify-content:center;font-family:'Caveat',cursive;font-size:1.25rem;color:#cfe3c4;padding:12px;text-align:center}
+.video-kart .yazi{font-family:'Caveat',cursive;font-size:1.28rem;line-height:1.35;padding:9px 2px 0}
+
 canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
 .muzik-dugme{position:fixed;top:16px;right:16px;z-index:95;width:44px;height:44px;border-radius:50%;border:1px solid rgba(250,243,227,.3);background:rgba(14,34,19,.6);color:var(--krem);font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 @media (prefers-reduced-motion: reduce){
@@ -550,6 +646,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
 </head>
 <body class="kilitli cimenli">
 
+<!-- kalp şekli için svg clip -->
 <svg width="0" height="0" style="position:absolute">
   <defs>
     <clipPath id="kalpKlip" clipPathUnits="objectBoundingBox">
@@ -558,6 +655,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   </defs>
 </svg>
 
+<!-- ============ KİLİT ============ -->
 <div id="kilitKatman">
   <div class="fon" id="kilitFon"></div>
   <div class="perde"></div>
@@ -576,6 +674,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <p class="ipucu" id="sifreIpucu"></p>
 </div>
 
+<!-- ============ 0. AÇILIŞ ============ -->
 <section class="bolum" id="acilis">
   <div class="acilis-fon" id="acilisFon"></div>
   <div class="acilis-perde"></div>
@@ -584,6 +683,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok">⌄</div>
 </section>
 
+<!-- ============ 1. PİKNİK SERME ============ -->
 <section class="bolum" id="giris">
   <svg class="kavis belir" viewBox="0 0 560 150">
     <defs><path id="yay" d="M 16 128 Q 280 14 544 128"/></defs>
@@ -613,6 +713,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b4">⌄</div>
 </section>
 
+<!-- ============ 2. ŞARKI ============ -->
 <section class="bolum" id="sarki">
   <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)">Bana seni hatırlatan şarkı</div>
   <div class="sarki-duzen">
@@ -636,6 +737,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b3">⌄</div>
 </section>
 
+<!-- ============ 3. KALP MADALYON ============ -->
 <section class="bolum" id="madalyon">
   <div class="zemin potikare dikisli belir">
     <span class="madalyon-cicek" style="left:8px;top:-16px">🌻</span>
@@ -657,6 +759,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b4">⌄</div>
 </section>
 
+<!-- ============ 4. ZARF ============ -->
 <section class="bolum" id="zarfBolum">
   <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)" id="zarfBaslik"></div>
   <div class="zarf-ortu potikare dikisli belir b1">
@@ -674,6 +777,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b3">⌄</div>
 </section>
 
+<!-- ============ 5. MEKTUP ============ -->
 <section class="bolum" id="mektup">
   <div class="mektup-kagit belir">
     <span class="kose" style="left:-12px;top:-14px">🌼</span>
@@ -686,6 +790,7 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b2" style="color:var(--krem)">⌄</div>
 </section>
 
+<!-- ============ 6. POLAROİDLER ============ -->
 <section class="bolum" id="anilar">
   <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)">Anılarımız</div>
   <div class="polaroidler" id="polaroidler"></div>
@@ -693,6 +798,15 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="ok belir b5" style="color:var(--krem)">⌄</div>
 </section>
 
+<!-- ============ 6.5 EKSTRA SEKMELER ============ -->
+<section class="bolum" id="ekstralar">
+  <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)">Dahası da var...</div>
+  <button class="buton belir b1" id="ikiYasAc"></button>
+  <button class="buton belir b2" id="videoAc"></button>
+  <div class="ok belir b3" style="color:var(--krem)">⌄</div>
+</section>
+
+<!-- ============ 8. HEDİYELER (dantel) ============ -->
 <section class="bolum" id="hediyeler">
   <div class="dantel belir">
     <div class="dantel-ust" id="hediyeUst"></div>
@@ -730,6 +844,25 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <p class="ipucu belir b4">Hediyelere dokun 🌷</p>
 </section>
 
+<!-- ============ MİNİ KİLİT (Zaman Tüneli şifresi) ============ -->
+<div class="mini-kilit-sayfa" id="miniKilitSayfa">
+  <button class="kapat" id="miniKapat" aria-label="Kapat">✕</button>
+  <div class="mini-baslik">Zaman Tüneli kilitli 🔒</div>
+  <div class="asma-kilit" id="miniAsma">
+    <div class="kanca"></div>
+    <div class="kilit-govde">
+      <div class="haneler">
+        <div class="hane"></div><div class="hane"></div><div class="hane"></div><div class="hane"></div>
+      </div>
+      <div class="delikk"></div>
+    </div>
+  </div>
+  <div class="tus-takimi" id="miniTus"></div>
+  <div id="miniMesaj" style="font-size:.85rem;min-height:1.2em;color:var(--gunes)"></div>
+  <p class="ipucu" id="miniIpucu"></p>
+</div>
+
+<!-- ============ ZAMAN TÜNELİ GALERİSİ ============ -->
 <div class="tunel" id="tunel">
   <div class="tunel-ust">
     <h2 id="tunelBaslik"></h2>
@@ -738,6 +871,52 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
   <div class="tunel-icerik" id="tunelIcerik"></div>
 </div>
 
+<!-- ============ MİNİ ŞİFRE (anılar) ============ -->
+<div class="mini-sifre" id="miniSifre">
+  <div class="msifre-kart" id="msifreKart">
+    <div class="msifre-baslik" id="msifreBaslik"></div>
+    <div class="haneler">
+      <div class="hane"></div><div class="hane"></div><div class="hane"></div><div class="hane"></div>
+    </div>
+    <div class="tus-takimi" id="msifreTuslar"></div>
+    <div id="msifreMesaj"></div>
+    <button class="msifre-vazgec" id="msifreVazgec">vazgeç</button>
+  </div>
+</div>
+
+<!-- ============ 2 YAŞ GALERİSİ ============ -->
+<div class="tunel" id="ikiYas">
+  <div class="tunel-ust">
+    <h2 id="ikiYasBaslik"></h2>
+    <button class="kapat" id="ikiYasKapat" aria-label="Kapat">✕</button>
+  </div>
+  <div class="izgara-icerik" id="ikiYasIcerik"></div>
+</div>
+
+<!-- ============ VİDEOLARIMIZ ============ -->
+<div class="tunel" id="videoTunel">
+  <div class="tunel-ust">
+    <h2 id="videoBaslik"></h2>
+    <button class="kapat" id="videoKapat" aria-label="Kapat">✕</button>
+  </div>
+  <div class="izgara-icerik" id="videoIcerik"></div>
+</div>
+
+<!-- ============ 6b. 2 YAŞ BÜYÜK ============ -->
+<section class="bolum" id="yas">
+  <div class="yas-baslik belir" id="yasBaslik"></div>
+  <div class="yas-galeri" id="yasGaleri"></div>
+  <div class="ok belir" style="color:var(--krem)">⌄</div>
+</section>
+
+<!-- ============ 6c. VİDEOLARIMIZ ============ -->
+<section class="bolum" id="videolar">
+  <div class="altbaslik zarif belir" style="font-family:'Pinyon Script',cursive;font-size:clamp(2rem,8vw,3rem);color:var(--krem)" id="videoBaslik"></div>
+  <div class="video-galeri" id="videoGaleri"></div>
+  <div class="ok belir" style="color:var(--krem)">⌄</div>
+</section>
+
+<!-- ============ 7. MANTAR PANO / FİNAL ============ -->
 <section class="bolum" id="final">
   <div class="pano belir">
     <span class="yildiz" style="left:16px;top:14px">★</span>
@@ -769,59 +948,161 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
 <audio id="muzik" loop></audio>
 
 <script>
+/* ==========================================================
+   ✏️ BURAYI DÜZENLE — tüm kişisel içerik bu bölümde
+   ========================================================== */
 const AYAR = {
   sifre: "2407",
-  sifreIpucu: "İpucu: bizim için önemli bir tarih 😉",
-  kilitArkaplanFoto: "",
-  acilisFoto: "",
+  sifreIpucu: "İpucu: bizim için önemli bir tarih 😉",   // "" yaparsan görünmez
+  kilitArkaplanFoto: "",   // Kilit ekranının arka plan fotoğrafı, örn: "arkaplan.jpg" (aynı klasöre koy)
+
+  // 0) Açılış — kilit açılınca gelen ilk ekran
+  acilisFoto: "",          // tüm sayfayı kaplayan fotoğraf, örn: "kapak.jpg" (boşsa yeşil zemin görünür)
   acilisBaslik: "Doğum günün kutlu olsun bitanem 🎂",
   acilisAlt: "aşağı kaydır, sürprizler seni bekliyor",
-  kavisYazi: "FAV DATE",
+
+  // 1) Giriş
+  kavisYazi: "FAV DATE",               // tepedeki kavisli büyük yazı
   girisAlt: "seninle ♡",
   girisMetin: "Bugün senin günün aşkım. Sana ekranda küçük bir sürpriz hazırladım; aşağı kaydır, her şey seni bekliyor.",
   kasetEtiket: "çalma listem ♡",
+
+  // 2) Şarkı
   sarkiAdi: "Bizim Şarkımız",
   sarkiSanatci: "Sanatçı",
-  youtubeId: "",
-  muzik: "",
-  kalpFoto1: "",
-  kalpFoto2: "",
+  youtubeId: "",   // Örn: "dQw4w9WgXcQ" → YouTube videosu gömülür. Boşsa şık bir kart görünür
+  muzik: "",       // mp3 dosya adı (aynı klasöre koy) → plak dönerken çalar
+
+  // 3) Kalp madalyon
+  kalpFoto1: "",   // sol kalpteki fotoğraf dosya adı
+  kalpFoto2: "",   // sağ kalpteki fotoğraf dosya adı
   nedenler: [
     "Gülüşünü seviyorum, her şeyi güzelleştiriyor",
     "Yanında kendim olabildiğim için seviyorum",
     "Beni benden iyi tanıdığın için seviyorum",
     "En kötü günümde bile yanımda olduğun için seviyorum"
   ],
+
+  // 4) Zarf
   zarfBaslik: "Sana bir şey yazdım",
   zarfNotu: "Doğum günün kutlu olsun aşkım 🌻 Aşağı kaydır, mektubun orada...",
+
+  // 5) Mektup — paragrafları | ile ayır
   mektupBaslik: "Doğum Günün Kutlu Olsun Aşkım!",
   mektup: "Canım benim,|Bir yaş daha büyüdün ve ben hâlâ sana her baktığımda ilk günkü gibi heyecanlanıyorum. Bu siteyi senin için yaptım çünkü sana olan sevgimi anlatmaya kelimeler yetmiyor, ben de oturup kod yazdım.|Yeni yaşın sana sağlık, huzur ve bol bol kahkaha getirsin. En sade anlarımız, büyük kutlamalarımız, tüm günlerimiz... hepsinde yanındayım.|Nice mutlu senelere...",
   imza: "— Seni çok seven sevgilin ❤️",
+
+  // 6) Anılar — Zaman Tüneli galerisi
+  // İKİNCİ ŞİFRE: Zaman Tüneli'ni açmak için sorulur.
+  anilarSifre: "1302",
+  anilarSifreIpucu: "first kiss 😘",
+  // Her anı için: dosya (fotoğraf adı), tarih (kalın başlık), aciklama (altındaki yazı).
+  // 50 yer hazır — sadece dosya adlarını ve yazıları doldur. Son satır hariç virgüllere dikkat.
   galeriBaslik: "Zaman Tünelimiz 🕰️",
   fotograflar: [
-    { dosya: "", tarih: "24 Temmuz — Tanıştığımız Gün", aciklama: "Her şeyin başladığı o gün. İyi ki karşıma çıktın." },
-    { dosya: "", tarih: "İlk Fotoğrafımız", aciklama: "İkimiz de ne kadar heyecanlıydık, yüzümüzden okunuyor." },
-    { dosya: "", tarih: "İlk Tatilimiz", aciklama: "Deniz, güneş ve sen. Daha ne olsun." },
-    { dosya: "", tarih: "O Akşam", aciklama: "Saatlerce gülmekten karnımız ağrımıştı." },
-    { dosya: "", tarih: "Kış Günü", aciklama: "Soğukta bile içimi ısıtan tek şey sendin." },
-    { dosya: "", tarih: "Sıradan Bir Gün", aciklama: "Seninle sıradan günler bile özel." }
+    { dosya: "", tarih: "Anı 1 — Tanıştığımız Gün", aciklama: "Her şeyin başladığı o gün." },
+    { dosya: "", tarih: "Anı 2 — İlk Fotoğrafımız", aciklama: "İkimiz de ne kadar heyecanlıydık." },
+    { dosya: "", tarih: "Anı 3", aciklama: "" },
+    { dosya: "", tarih: "Anı 4", aciklama: "" },
+    { dosya: "", tarih: "Anı 5", aciklama: "" },
+    { dosya: "", tarih: "Anı 6", aciklama: "" },
+    { dosya: "", tarih: "Anı 7", aciklama: "" },
+    { dosya: "", tarih: "Anı 8", aciklama: "" },
+    { dosya: "", tarih: "Anı 9", aciklama: "" },
+    { dosya: "", tarih: "Anı 10", aciklama: "" },
+    { dosya: "", tarih: "Anı 11", aciklama: "" },
+    { dosya: "", tarih: "Anı 12", aciklama: "" },
+    { dosya: "", tarih: "Anı 13", aciklama: "" },
+    { dosya: "", tarih: "Anı 14", aciklama: "" },
+    { dosya: "", tarih: "Anı 15", aciklama: "" },
+    { dosya: "", tarih: "Anı 16", aciklama: "" },
+    { dosya: "", tarih: "Anı 17", aciklama: "" },
+    { dosya: "", tarih: "Anı 18", aciklama: "" },
+    { dosya: "", tarih: "Anı 19", aciklama: "" },
+    { dosya: "", tarih: "Anı 20", aciklama: "" },
+    { dosya: "", tarih: "Anı 21", aciklama: "" },
+    { dosya: "", tarih: "Anı 22", aciklama: "" },
+    { dosya: "", tarih: "Anı 23", aciklama: "" },
+    { dosya: "", tarih: "Anı 24", aciklama: "" },
+    { dosya: "", tarih: "Anı 25", aciklama: "" },
+    { dosya: "", tarih: "Anı 26", aciklama: "" },
+    { dosya: "", tarih: "Anı 27", aciklama: "" },
+    { dosya: "", tarih: "Anı 28", aciklama: "" },
+    { dosya: "", tarih: "Anı 29", aciklama: "" },
+    { dosya: "", tarih: "Anı 30", aciklama: "" },
+    { dosya: "", tarih: "Anı 31", aciklama: "" },
+    { dosya: "", tarih: "Anı 32", aciklama: "" },
+    { dosya: "", tarih: "Anı 33", aciklama: "" },
+    { dosya: "", tarih: "Anı 34", aciklama: "" },
+    { dosya: "", tarih: "Anı 35", aciklama: "" },
+    { dosya: "", tarih: "Anı 36", aciklama: "" },
+    { dosya: "", tarih: "Anı 37", aciklama: "" },
+    { dosya: "", tarih: "Anı 38", aciklama: "" },
+    { dosya: "", tarih: "Anı 39", aciklama: "" },
+    { dosya: "", tarih: "Anı 40", aciklama: "" },
+    { dosya: "", tarih: "Anı 41", aciklama: "" },
+    { dosya: "", tarih: "Anı 42", aciklama: "" },
+    { dosya: "", tarih: "Anı 43", aciklama: "" },
+    { dosya: "", tarih: "Anı 44", aciklama: "" },
+    { dosya: "", tarih: "Anı 45", aciklama: "" },
+    { dosya: "", tarih: "Anı 46", aciklama: "" },
+    { dosya: "", tarih: "Anı 47", aciklama: "" },
+    { dosya: "", tarih: "Anı 48", aciklama: "" },
+    { dosya: "", tarih: "Anı 49", aciklama: "" },
+    { dosya: "", tarih: "Anı 50", aciklama: "" }
   ],
+
+  // 6b) "BİTANEM ARTIK 2 YAŞ BÜYÜK" bölümü — 22 sıralı fotoğraf
+  yasBaslik: "BİTANEM ARTIK 2 YAŞ BÜYÜK",
+  yasFotolari: [
+    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
+    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
+    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
+    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
+    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
+    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }
+  ],
+
+  // 6c) Videolarımız bölümü — 10 video, altlarına yazı yazabilirsin
+  // Video dosyalarını da repoya yükle (her biri 100MB altı olmalı, 25MB altı idealdir).
+  videoBaslik: "Videolarımız 🎬",
+  videolar: [
+    { dosya: "", yazi: "Video 1 için yazın buraya" },
+    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
+    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
+    { dosya: "", yazi: "" }
+  ],
+
+  // 7) Final panosu
   finalNot: "Umarım bu küçük sürpriz seni gülümsetmiştir. Her yaşında yanındayım. Seni çok seviyorum!",
   cepNotu: "cebimde hep sen ♡",
+
+  // 8) Hediyeler (en sondaki dantel kart)
   hediyeUst: "Bunlar",
   hediyeAlt: "Sana özel hediyeler!",
   hediyeAdlari: ["Pasta", "İlk Hediyem", "2. Hediyem"],
+  // Her hediyeye tıklanınca açılan sayfalar — metinde paragrafları | ile ayır:
   hediyeSayfalari: [
     { baslik: "🍰 Pasta", metin: "Buraya pastayla ilgili yazmak istediklerini yaz.|Mesela: bu pastayı sana kendi ellerimle yapacağım, dilimi büyük kesmeyi unutma..." },
     { baslik: "🎁 İlk Hediyem", metin: "İlk hediyenle ilgili notun buraya.|Küçük bir ipucu bile yazabilirsin, açarken okusun." },
     { baslik: "📝 2. Hediyem", metin: "İkinci hediyenin notu buraya.|İstediğin kadar paragraf ekleyebilirsin." }
   ],
-  cicekVideo: "cicek.webm",
-  cicekGorselleri: [],
-  laleGorsel: ""
+  // Çiçek animasyonu:
+  // 1) VİDEO MODU (senin Gemini videon): dosya adını yaz, tetiklenince tam ekran oynar.
+  //    cicek.mp4 ve cicek.webm dosyalarını siteyle aynı klasöre/repoya yükle.
+  cicekVideo: "cicek.mp4",
+  // 2) ÇİZİM MODU: cicekVideo'yu "" yaparsan çizdiğim çiçek duvarı (gül+papatya+lale) kullanılır.
+  //    İstersen kendi PNG çiçeklerini de verebilirsin:
+  cicekGorselleri: [],          // örn: ["cicek1.png", "cicek2.png", "cicek3.png", "cicek4.png"]
+  laleGorsel: ""                // (eski ayar, tek görsel; cicekGorselleri boşsa bu kullanılır)
 };
+/* ========================================================== */
+</script>
 
+<script>
 const $ = s => document.querySelector(s);
+
+/* ---- içerik yerleştir ---- */
 $("#acilisBaslik").textContent = AYAR.acilisBaslik;
 $("#acilisAlt").textContent = AYAR.acilisAlt || "";
 if (AYAR.acilisFoto) $("#acilisFon").style.backgroundImage = `url('${AYAR.acilisFoto}')`;
@@ -841,10 +1122,12 @@ $("#finalNot").textContent = AYAR.finalNot;
 $("#cepNotu").textContent = AYAR.cepNotu;
 $("#mektupMetin").innerHTML = AYAR.mektup.split("|").map(p => `<p style="margin-bottom:9px">${p.trim()}</p>`).join("");
 
+/* şarkı oynatıcı: youtube ya da şık kart */
 $("#calarIcerik").innerHTML = AYAR.youtubeId
   ? `<iframe src="https://www.youtube.com/embed/${AYAR.youtubeId}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
   : `<div class="sahte"><div class="oynat">▶</div><div class="ad">${AYAR.sarkiAdi}</div><div class="sanatci">${AYAR.sarkiSanatci}</div></div>`;
 
+/* kalp fotoğrafları */
 function kalpDoldur(hedef, dosya, no){
   $(hedef).innerHTML = dosya
     ? `<img src="${dosya}" alt="">`
@@ -853,6 +1136,7 @@ function kalpDoldur(hedef, dosya, no){
 kalpDoldur("#kalp1", AYAR.kalpFoto1, 1);
 kalpDoldur("#kalp2", AYAR.kalpFoto2, 2);
 
+/* neden notları */
 AYAR.nedenler.forEach((metin, i) => {
   const d = document.createElement("div");
   d.className = "not belir b" + Math.min(i + 3, 6);
@@ -860,36 +1144,21 @@ AYAR.nedenler.forEach((metin, i) => {
   $("#notlar").appendChild(d);
 });
 
+/* polaroidler: ana sayfada ilk 3 anı önizleme olarak görünür */
 AYAR.fotograflar.slice(0, 3).forEach((f, i) => {
   const k = document.createElement("div");
   k.className = "kart belir b" + Math.min(i + 1, 6);
-  // Parallax için rotasyon değerini saklıyoruz
-  k.dataset.rot = i % 2 === 0 ? "-2.6deg" : "2.2deg";
   k.innerHTML = `<div class="foto">${f.dosya ? `<img src="${f.dosya}" alt="" loading="lazy">` : `<div class="yertutucu">Buraya fotoğrafımız gelecek ❤️<br>(${i + 1})</div>`}</div>
                  <div class="altyazi">${f.tarih || ""}</div>`;
   $("#polaroidler").appendChild(k);
 });
 
-/* PARALLAX EFEKTİ */
-window.addEventListener('scroll', () => {
-    const anilarSection = document.querySelector('#anilar');
-    const cards = document.querySelectorAll('.kart');
-    const scrolled = window.scrollY;
-    const rect = anilarSection.getBoundingClientRect();
-    
-    // Sadece anılar bölümü ekrandayken çalıştır
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-        cards.forEach((card, index) => {
-            const speed = (index % 2 === 0) ? 0.12 : -0.12; 
-            const yOffset = (scrolled - (anilarSection.offsetTop - window.innerHeight)) * speed;
-            card.style.transform = `translateY(${yOffset}px) rotate(${card.dataset.rot})`;
-        });
-    }
-});
-
+/* ---- ZAMAN TÜNELİ GALERİSİ ---- */
+$("#tunelBaslik").textContent = AYAR.galeriBaslik;
+let tunelKuruldu = false;
 function tunelKur(){
-  if (window.tunelKuruldu) return;
-  window.tunelKuruldu = true;
+  if (tunelKuruldu) return;
+  tunelKuruldu = true;
   const icerik = $("#tunelIcerik");
   AYAR.fotograflar.forEach((f, i) => {
     const a = document.createElement("div");
@@ -911,9 +1180,19 @@ function tunelKapat(){
   $("#tunel").classList.remove("acik");
   document.body.classList.remove("tunelde");
 }
-$("#tunelAc").onclick = tunelAc;
+$("#tunelAc").onclick = () => {
+  if (anilarAcik) { tunelAc(); return; }
+  $("#miniKilitSayfa").classList.add("acik");
+};
 $("#tunelKapat").onclick = tunelKapat;
+addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if ($("#miniKilitSayfa").classList.contains("acik")) $("#miniKilitSayfa").classList.remove("acik");
+  else if ($("#hediyeSayfa").classList.contains("acik")) hediyeSayfaKapat();
+  else if ($("#tunel").classList.contains("acik")) tunelKapat();
+});
 
+/* ---- ŞİFRE ---- */
 if (AYAR.kilitArkaplanFoto) {
   $("#kilitFon").style.backgroundImage = `url('${AYAR.kilitArkaplanFoto}')`;
 }
@@ -927,7 +1206,7 @@ let girilen = "";
   tusTakimi.appendChild(b);
 });
 function haneGuncelle(){
-  document.querySelectorAll(".hane").forEach((h, i) => {
+  document.querySelectorAll("#asmaKilit .hane").forEach((h, i) => {
     h.textContent = girilen[i] || "";
     h.classList.toggle("dolu", i < girilen.length);
   });
@@ -943,7 +1222,7 @@ function tusBas(t){
 function kontrolEt(){
   if (girilen === AYAR.sifre) {
     $("#sifreMesaj").textContent = "Doğru! Hoş geldin 🌷";
-    $("#asmaKilit").classList.add("acik");
+    $("#asmaKilit").classList.add("acik");   // kanca yukarı atar
     konfeti(80);
     laleFirlat();
     setTimeout(() => {
@@ -958,11 +1237,79 @@ function kontrolEt(){
   }
 }
 
+/* ---- 2 YAŞ BÜYÜK bölümü ---- */
+$("#yasBaslik").textContent = AYAR.yasBaslik;
+AYAR.yasFotolari.forEach((f, i) => {
+  const k = document.createElement("div");
+  k.className = "yas-kart belir b" + ((i % 6) + 1);
+  k.innerHTML = `<div class="no">${i + 1}</div>
+    ${f.dosya ? `<img src="${f.dosya}" alt="" loading="lazy">` : `<div class="bos">Fotoğraf ${i + 1}</div>`}
+    ${f.yazi ? `<div class="yazi">${f.yazi}</div>` : ""}`;
+  $("#yasGaleri").appendChild(k);
+});
+
+/* ---- VİDEOLARIMIZ bölümü ---- */
+$("#videoBaslik").textContent = AYAR.videoBaslik;
+AYAR.videolar.forEach((v, i) => {
+  const k = document.createElement("div");
+  k.className = "video-kart belir b" + ((i % 4) + 1);
+  k.innerHTML = `${v.dosya
+      ? `<video src="${v.dosya}" controls playsinline preload="metadata"></video>`
+      : `<div class="bos">Video ${i + 1} buraya gelecek 🎬</div>`}
+    <div class="yazi">${v.yazi || ""}</div>`;
+  $("#videoGaleri").appendChild(k);
+});
+
+/* ---- MİNİ KİLİT: Zaman Tüneli şifresi ---- */
+$("#miniIpucu").textContent = AYAR.anilarSifreIpucu || "";
+let anilarAcik = false, girilenM = "";
+[1,2,3,4,5,6,7,8,9,"sil",0,"tamam"].forEach(t => {
+  const b = document.createElement("button");
+  b.className = "tus" + (typeof t === "string" ? " yardimci" : "");
+  b.textContent = t === "sil" ? "⌫" : (t === "tamam" ? "✓" : t);
+  b.onclick = () => miniTusBas(t);
+  $("#miniTus").appendChild(b);
+});
+function miniHane(){
+  document.querySelectorAll("#miniAsma .hane").forEach((h, i) => {
+    h.textContent = girilenM[i] || "";
+    h.classList.toggle("dolu", i < girilenM.length);
+  });
+}
+function miniTusBas(t){
+  const msj = $("#miniMesaj");
+  if (t === "sil") { girilenM = girilenM.slice(0, -1); msj.textContent = ""; }
+  else if (t === "tamam") { if (girilenM.length === 4) miniKontrol(); }
+  else if (girilenM.length < 4) { girilenM += t; msj.textContent = ""; }
+  miniHane();
+  if (girilenM.length === 4 && t !== "tamam") setTimeout(miniKontrol, 250);
+}
+function miniKontrol(){
+  if (girilenM === AYAR.anilarSifre) {
+    anilarAcik = true;
+    $("#miniMesaj").textContent = "Doğru! 💚";
+    $("#miniAsma").classList.add("acik");
+    setTimeout(() => {
+      $("#miniKilitSayfa").classList.remove("acik");
+      $("#miniAsma").classList.remove("acik");
+      girilenM = ""; miniHane(); $("#miniMesaj").textContent = "";
+      tunelAc();
+    }, 1000);
+  } else {
+    $("#miniAsma").classList.add("hata");
+    $("#miniMesaj").textContent = "Olmadı, bir daha düşün 😉";
+    setTimeout(() => { $("#miniAsma").classList.remove("hata"); girilenM = ""; miniHane(); }, 500);
+  }
+}
+$("#miniKapat").onclick = () => $("#miniKilitSayfa").classList.remove("acik");
+
+/* ---- kaydırınca belirme ---- */
 const gozlemci = new IntersectionObserver(girenler => {
   girenler.forEach(g => { if (g.isIntersecting) g.target.classList.add("g"); });
 }, { threshold: 0.18 });
 document.querySelectorAll(".belir").forEach(el => gozlemci.observe(el));
 
+/* ---- final bölümü görününce konfeti + kalpler ---- */
 let finalOldu = false;
 new IntersectionObserver(girenler => {
   girenler.forEach(g => {
@@ -973,6 +1320,7 @@ new IntersectionObserver(girenler => {
   });
 }, { threshold: 0.4 }).observe($("#final"));
 
+/* ---- PLAK ---- */
 const muzik = $("#muzik"), muzikBtn = $("#muzikBtn");
 let muzikAcik = false;
 if (AYAR.muzik) muzik.src = AYAR.muzik;
@@ -991,6 +1339,7 @@ muzikBtn.onclick = () => {
   $("#plak").classList.toggle("donuyor", muzikAcik);
 };
 
+/* ---- ZARF ---- */
 $("#zarf").addEventListener("click", function(){
   if (this.classList.contains("acik")) return;
   this.classList.add("acik");
@@ -998,41 +1347,83 @@ $("#zarf").addEventListener("click", function(){
   setTimeout(() => $("#mektup").scrollIntoView({ behavior: "smooth" }), 2600);
 });
 
+/* ---- HEDİYELER ---- */
 $("#hediyeUst").textContent = AYAR.hediyeUst;
 $("#hediyeAlt").textContent = AYAR.hediyeAlt;
 AYAR.hediyeAdlari.forEach((ad, i) => { const el = $("#hediyeAd" + i); if (el) el.textContent = ad; });
 
-const lalePaletleri = [["#f6b9d0","#e07ba1","#b34d74"],["#e2685a","#c2453a","#8c261d"],["#f8ead9","#e8c9a8","#c9a077"],["#b9c3ee","#8291d6","#5a68a8"],["#f4c15e","#e0993a","#b06f1e"]];
+/* ---- ÇİÇEK DUVARI (video tarzı: ekranı kaplayıp kaybolan çiçekler) ---- */
+const lalePaletleri = [
+  ["#f6b9d0","#e07ba1","#b34d74"],   /* pembe    */
+  ["#e2685a","#c2453a","#8c261d"],   /* kırmızı  */
+  ["#f8ead9","#e8c9a8","#c9a077"],   /* krem     */
+  ["#b9c3ee","#8291d6","#5a68a8"],   /* leylak   */
+  ["#f4c15e","#e0993a","#b06f1e"]    /* sarı     */
+];
 let cicekSayac = 0;
 function laleSvg(palet){
   const id = "cg" + (cicekSayac++);
   const [acik, orta, koyu] = palet;
-  return `<svg viewBox="0 0 100 260" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="${id}a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${acik}"/><stop offset="1" stop-color="${orta}"/></linearGradient><linearGradient id="${id}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${orta}"/><stop offset="1" stop-color="${koyu}"/></linearGradient><linearGradient id="${id}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d9a63"/><stop offset="1" stop-color="#35633c"/></linearGradient></defs><path d="M50 96 C47 150 53 205 50 256" stroke="url(#${id}s)" stroke-width="5.5" fill="none" stroke-linecap="round"/><path d="M50 168 C24 158 8 190 16 224 C36 214 47 190 50 176 Z" fill="url(#${id}s)"/><path d="M50 196 C74 188 88 214 82 242 C62 234 53 214 50 204 Z" fill="url(#${id}s)" opacity=".92"/><path d="M50 98 C26 94 12 62 17 18 C33 34 44 44 50 62 Z" fill="url(#${id}b)"/><path d="M50 98 C74 94 88 62 83 18 C67 34 56 44 50 62 Z" fill="url(#${id}b)"/><path d="M50 100 C32 94 26 46 34 8 C42 24 58 24 66 8 C74 46 68 94 50 100 Z" fill="url(#${id}a)"/><path d="M50 100 C42 96 38 66 40 34 C46 48 54 48 60 34 C62 66 58 96 50 100 Z" fill="${acik}" opacity=".45"/></svg>`;
+  return `<svg viewBox="0 0 100 260" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="${id}a" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${acik}"/><stop offset="1" stop-color="${orta}"/></linearGradient>
+      <linearGradient id="${id}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${orta}"/><stop offset="1" stop-color="${koyu}"/></linearGradient>
+      <linearGradient id="${id}s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5d9a63"/><stop offset="1" stop-color="#35633c"/></linearGradient>
+    </defs>
+    <path d="M50 96 C47 150 53 205 50 256" stroke="url(#${id}s)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+    <path d="M50 168 C24 158 8 190 16 224 C36 214 47 190 50 176 Z" fill="url(#${id}s)"/>
+    <path d="M50 196 C74 188 88 214 82 242 C62 234 53 214 50 204 Z" fill="url(#${id}s)" opacity=".92"/>
+    <path d="M50 98 C26 94 12 62 17 18 C33 34 44 44 50 62 Z" fill="url(#${id}b)"/>
+    <path d="M50 98 C74 94 88 62 83 18 C67 34 56 44 50 62 Z" fill="url(#${id}b)"/>
+    <path d="M50 100 C32 94 26 46 34 8 C42 24 58 24 66 8 C74 46 68 94 50 100 Z" fill="url(#${id}a)"/>
+    <path d="M50 100 C42 96 38 66 40 34 C46 48 54 48 60 34 C62 66 58 96 50 100 Z" fill="${acik}" opacity=".45"/>
+  </svg>`;
 }
 function gulSvg(palet){
   const id = "cg" + (cicekSayac++);
   const [acik, orta, koyu] = palet;
   let dis = "", ic = "";
-  for (let i = 0; i < 8; i++) dis += `<path d="M50 4 C66 8 76 26 68 42 C60 32 54 28 50 24 Z" fill="${i % 2 ? orta : acik}" transform="rotate(${i * 45} 50 50)"/>`;
-  for (let i = 0; i < 6; i++) ic += `<path d="M50 20 C60 23 66 34 61 44 C56 37 52 34 50 31 Z" fill="${i % 2 ? koyu : orta}" transform="rotate(${i * 60 + 22} 50 50)"/>`;
-  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="47" fill="${orta}" opacity=".28"/>${dis}${ic}<circle cx="50" cy="50" r="15" fill="${koyu}"/><path d="M50 50 c7 -3 10 6 3 9 c-9 4 -15 -7 -3 -13 c13 -6 21 10 5 18" stroke="${acik}" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`;
+  for (let i = 0; i < 8; i++)
+    dis += `<path d="M50 4 C66 8 76 26 68 42 C60 32 54 28 50 24 Z" fill="${i % 2 ? orta : acik}" transform="rotate(${i * 45} 50 50)"/>`;
+  for (let i = 0; i < 6; i++)
+    ic += `<path d="M50 20 C60 23 66 34 61 44 C56 37 52 34 50 31 Z" fill="${i % 2 ? koyu : orta}" transform="rotate(${i * 60 + 22} 50 50)"/>`;
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="47" fill="${orta}" opacity=".28"/>
+    ${dis}${ic}
+    <circle cx="50" cy="50" r="15" fill="${koyu}"/>
+    <path d="M50 50 c7 -3 10 6 3 9 c-9 4 -15 -7 -3 -13 c13 -6 21 10 5 18" stroke="${acik}" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </svg>`;
 }
 function papatyaSvg(){
+  const id = "cg" + (cicekSayac++);
   let t = "";
-  for (let i = 0; i < 12; i++) t += `<ellipse cx="50" cy="16" rx="9" ry="19" fill="${i % 2 ? "#ffffff" : "#f6f1e4"}" transform="rotate(${i * 30} 50 50)"/>`;
-  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${t}<circle cx="50" cy="50" r="15" fill="#e9b64c"/><circle cx="45" cy="46" r="2.4" fill="#c88f2a"/><circle cx="55" cy="49" r="2.4" fill="#c88f2a"/><circle cx="49" cy="55" r="2.4" fill="#c88f2a"/><circle cx="53" cy="43" r="1.8" fill="#c88f2a"/></svg>`;
+  for (let i = 0; i < 12; i++)
+    t += `<ellipse cx="50" cy="16" rx="9" ry="19" fill="${i % 2 ? "#ffffff" : "#f6f1e4"}" transform="rotate(${i * 30} 50 50)"/>`;
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${t}
+    <circle cx="50" cy="50" r="15" fill="#e9b64c"/>
+    <circle cx="45" cy="46" r="2.4" fill="#c88f2a"/><circle cx="55" cy="49" r="2.4" fill="#c88f2a"/>
+    <circle cx="49" cy="55" r="2.4" fill="#c88f2a"/><circle cx="53" cy="43" r="1.8" fill="#c88f2a"/>
+  </svg>`;
 }
 function tomurcukSvg(palet){
+  const id = "cg" + (cicekSayac++);
   const [acik, orta, koyu] = palet;
   let t = "";
-  for (let i = 0; i < 5; i++) t += `<path d="M50 12 C63 14 66 32 50 40 C34 32 37 14 50 12 Z" fill="${i % 2 ? orta : acik}" transform="rotate(${i * 72} 50 50)"/>`;
-  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${t}<circle cx="50" cy="50" r="10" fill="${koyu}"/><circle cx="47" cy="47" r="3.5" fill="${acik}" opacity=".8"/></svg>`;
+  for (let i = 0; i < 5; i++)
+    t += `<path d="M50 12 C63 14 66 32 50 40 C34 32 37 14 50 12 Z" fill="${i % 2 ? orta : acik}" transform="rotate(${i * 72} 50 50)"/>`;
+  return `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">${t}
+    <circle cx="50" cy="50" r="10" fill="${koyu}"/><circle cx="47" cy="47" r="3.5" fill="${acik}" opacity=".8"/>
+  </svg>`;
 }
 function rastgeleCicek(){
-  if (cicekGorselleri.length) return `<img src="${cicekGorselleri[Math.floor(Math.random() * cicekGorselleri.length)]}" alt="">`;
+  if (cicekGorselleri.length)
+    return `<img src="${cicekGorselleri[Math.floor(Math.random() * cicekGorselleri.length)]}" alt="">`;
   const palet = lalePaletleri[Math.floor(Math.random() * lalePaletleri.length)];
   const z = Math.random();
-  if (z < .38) return gulSvg(palet); if (z < .58) return papatyaSvg(); if (z < .8)  return tomurcukSvg(palet); return laleSvg(palet);
+  if (z < .38) return gulSvg(palet);
+  if (z < .58) return papatyaSvg();
+  if (z < .8)  return tomurcukSvg(palet);
+  return laleSvg(palet);
 }
 let cicekVideoEl = null, cicekVideoBozuk = false;
 function cicekVideoOynat(){
@@ -1080,7 +1471,9 @@ function cicekDuvari(adet = 64){
 }
 const cicekGorselleri = (AYAR.cicekGorselleri || []).filter(Boolean);
 if (!cicekGorselleri.length && AYAR.laleGorsel) cicekGorselleri.push(AYAR.laleGorsel);
+cicekGorselleri.forEach(src => { const im = new Image(); im.src = src; });   /* ön yükleme */
 
+/* ---- HEDİYE SAYFALARI ---- */
 function hediyeSayfaAc(i){
   const s = AYAR.hediyeSayfalari[i] || { baslik: "", metin: "" };
   $("#hediyeSayfaBaslik").textContent = s.baslik;
@@ -1102,7 +1495,7 @@ document.querySelectorAll(".hediye3").forEach(h => {
     setTimeout(() => hediyeSayfaAc(+h.dataset.hediye), 1000);
   });
 });
-
+/* ---- EFEKTLER: konfeti, kalpler, laleler, ateş böcekleri ---- */
 const cv = $("#fx"), ctx = cv.getContext("2d");
 function boyutla(){ cv.width = innerWidth; cv.height = innerHeight; }
 boyutla(); addEventListener("resize", boyutla);
@@ -1130,7 +1523,7 @@ function kalpEkle(x, y){
   });
 }
 addEventListener("pointerdown", e => {
-  if (e.target.closest && e.target.closest(".hediye3")) return;
+  if (e.target.closest && e.target.closest(".hediye3")) return;   // hediye tıklamasında lale var, kalp basmasın
   if (kalpModu) kalpEkle(e.clientX, e.clientY);
 });
 setInterval(() => { if (kalpModu && parcalar.length < 90) kalpEkle(Math.random()*cv.width, cv.height + 20); }, 450);

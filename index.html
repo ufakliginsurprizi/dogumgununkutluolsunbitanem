@@ -1151,10 +1151,10 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
 const AYAR = {
   sifre: "2407",
   sifreIpucu: "İpucu: bizim için önemli bir tarih 😉",   // "" yaparsan görünmez
-  kilitArkaplanFoto: "",   // Kilit ekranının arka plan fotoğrafı, örn: "arkaplan.jpg" (aynı klasöre koy)
+  kilitArkaplanFoto: "kilit.jpeg",   // Kilit ekranının arka plan fotoğrafı, örn: "arkaplan.jpg" (aynı klasöre koy)
 
   // 0) Açılış — kilit açılınca gelen ilk ekran
-  acilisFoto: "",          // tüm sayfayı kaplayan fotoğraf, örn: "kapak.jpg" (boşsa yeşil zemin görünür)
+  acilisFoto: "kapak.jpeg",          // tüm sayfayı kaplayan fotoğraf, örn: "kapak.jpg" (boşsa yeşil zemin görünür)
   acilisBaslik: "Doğum günün kutlu olsun bitanem 🎂",
   acilisAlt: "aşağı kaydır, sürprizler seni bekliyor",
 
@@ -1171,8 +1171,8 @@ const AYAR = {
   muzik: "",       // mp3 dosya adı (aynı klasöre koy) → plak dönerken çalar
 
   // 3) Kalp madalyon
-  kalpFoto1: "",   // sol kalpteki fotoğraf dosya adı
-  kalpFoto2: "",   // sağ kalpteki fotoğraf dosya adı
+  kalpFoto1: "kalp-1.jpeg",   // sol kalpteki fotoğraf dosya adı
+  kalpFoto2: "kalp-2.jpeg",   // sağ kalpteki fotoğraf dosya adı
   nedenler: [
     "Gülüşünü seviyorum, her şeyi güzelleştiriyor",
     "Yanında kendim olabildiğim için seviyorum",
@@ -1243,22 +1243,22 @@ const AYAR = {
   // 6b) "BİTANEM ARTIK 2 YAŞ BÜYÜK" bölümü — 22 sıralı fotoğraf
   yasBaslik: "BİTANEM ARTIK 2 YAŞ BÜYÜK",
   yasFotolari: [
-    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
-    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
-    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
-    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
-    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
-    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }
+    { dosya: "yas-1.jpeg", yazi: "" }, { dosya: "yas-2.jpeg", yazi: "" }, { dosya: "yas-3.jpeg", yazi: "" }, { dosya: "yas-4.jpeg", yazi: "" },
+    { dosya: "yas-5.jpeg", yazi: "" }, { dosya: "yas-6.jpeg", yazi: "" }, { dosya: "yas-7.jpeg", yazi: "" }, { dosya: "yas-8.jpeg", yazi: "" },
+    { dosya: "yas-9.jpeg", yazi: "" }, { dosya: "yas-10.jpeg", yazi: "" }, { dosya: "yas-11.jpeg", yazi: "" }, { dosya: "yas-12.jpeg", yazi: "" },
+    { dosya: "yas-13.jpeg", yazi: "" }, { dosya: "yas-14.jpeg", yazi: "" }, { dosya: "yas-15.jpeg", yazi: "" }, { dosya: "yas-16.jpeg", yazi: "" },
+    { dosya: "yas-17.jpeg", yazi: "" }, { dosya: "yas-18.jpeg", yazi: "" }, { dosya: "yas-19.jpeg", yazi: "" }, { dosya: "yas-20.jpeg", yazi: "" },
+    { dosya: "yas-21.jpeg", yazi: "" }, { dosya: "yas-22.jpeg", yazi: "" }
   ],
 
   // 6c) Videolarımız bölümü — 10 video, altlarına yazı yazabilirsin
   // Video dosyalarını da repoya yükle (her biri 100MB altı olmalı, 25MB altı idealdir).
   videoBaslik: "Videolarımız 🎬",
   videolar: [
-    { dosya: "", yazi: "Video 1 için yazın buraya" },
-    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
-    { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" }, { dosya: "", yazi: "" },
-    { dosya: "", yazi: "" }
+    { dosya: "video-1.mp4", yazi: "Video 1 için yazın buraya" },
+    { dosya: "video-2.mp4", yazi: "" }, { dosya: "video-3.mp4", yazi: "" }, { dosya: "video-4.mp4", yazi: "" }, { dosya: "video-5.mp4", yazi: "" },
+    { dosya: "video-6.mp4", yazi: "" }, { dosya: "video-7.mp4", yazi: "" }, { dosya: "video-8.mp4", yazi: "" }, { dosya: "video-9.mp4", yazi: "" },
+    { dosya: "video-10.mp4", yazi: "" }
   ],
 
   // 6d) Erasmus Hikayemiz — rota dizilimi (sağlı sollu, çizgiyle bağlı)
@@ -1269,12 +1269,12 @@ const AYAR = {
   biletSag: "BEN",
   biletCagri: "Hikayemizi aç →",
   erasmusFotolari: [
-    { dosya: "", baslik: "1. Durak — Yola Çıkış", yazi: "Her şey o biletle başladı." },
-    { dosya: "", baslik: "2. Durak", yazi: "" },
-    { dosya: "", baslik: "3. Durak", yazi: "" },
-    { dosya: "", baslik: "4. Durak", yazi: "" },
-    { dosya: "", baslik: "5. Durak", yazi: "" },
-    { dosya: "", baslik: "6. Durak — Ve devamı...", yazi: "" }
+    { dosya: "erasmus-1.jpeg", baslik: "1. Durak — Yola Çıkış", yazi: "Her şey o biletle başladı." },
+    { dosya: "erasmus-2.jpeg", baslik: "2. Durak", yazi: "" },
+    { dosya: "erasmus-3.jpeg", baslik: "3. Durak", yazi: "" },
+    { dosya: "erasmus-4.jpeg", baslik: "4. Durak", yazi: "" },
+    { dosya: "erasmus-5.jpeg", baslik: "5. Durak", yazi: "" },
+    { dosya: "erasmus-6.jpeg", baslik: "6. Durak — Ve devamı...", yazi: "" }
   ],
 
   // 7) Final panosu

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Piknik Randevusu 🧺</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat:wght@500;700&family=Pinyon+Script&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Caveat:wght@500;700&family=Patrick+Hand&family=Pinyon+Script&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --cimen-koyu:#0e2213;
@@ -771,9 +771,9 @@ body.tunelde{overflow:hidden;height:100svh}
 }
 .agac-sahne{position:relative;width:min(680px,94vw);display:flex;flex-direction:column;align-items:center;gap:6px}
 .agac-not{
-  align-self:flex-start;text-align:left;max-width:min(320px,80vw);
-  font-family:'Caveat',cursive;font-size:clamp(1.25rem,4.6vw,1.55rem);line-height:1.45;
-  color:#4a3d2e;min-height:5.6em;
+  align-self:flex-start;text-align:left;width:min(90%,520px);
+  font-family:'Patrick Hand','Caveat',cursive;font-size:clamp(1.3rem,5vw,2rem);line-height:1.5;
+  color:#4a3d2e;min-height:5em;
 }
 .agac-not .imlec{display:inline-block;width:2px;height:1em;background:#8a6b3a;margin-left:2px;vertical-align:-2px;animation:yanip .8s step-end infinite}
 .agac-svg{width:min(340px,80vw);height:auto;display:block;overflow:visible}
@@ -1109,15 +1109,17 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
         <div class="agac-not"><span id="agacNotMetin"></span><span class="imlec" id="agacImlec"></span></div>
         <svg class="agac-svg" id="agacSvg" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
           <g class="govde-grubu">
-            <path d="M133 326 C137 294 139 264 143 236 C145 220 147 208 149 197
-                     C139 186 124 171 115 154 L124 147 C134 162 144 175 150 185
-                     C156 173 168 158 181 146 L190 153 C179 167 164 184 157 197
-                     C159 210 159 224 160 240 C162 268 164 296 167 326 Z"
+            <g transform="translate(150 326) scale(.84) translate(-150 -326)">
+            <path d="M137 326 C140 296 142 268 145 240 C146 226 148 214 149 202
+                     C141 192 129 179 121 163 L128 157 C137 170 145 181 150 190
+                     C155 180 165 167 176 156 L183 162 C173 175 160 190 155 202
+                     C156 214 157 228 158 244 C160 272 161 298 163 326 Z"
                   fill="#6e4a2e"/>
-            <path d="M150 178 C150 164 151 150 153 137" stroke="#6e4a2e" stroke-width="6" fill="none" stroke-linecap="round"/>
-            <path d="M120 158 C112 150 106 142 102 132" stroke="#6e4a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <path d="M184 152 C192 144 198 136 202 126" stroke="#6e4a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
-            <ellipse cx="150" cy="325" rx="58" ry="7" fill="#6e4a2e" opacity=".22"/>
+            <path d="M150 184 C150 170 151 158 152 146" stroke="#6e4a2e" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <path d="M126 166 C119 158 114 150 111 141" stroke="#6e4a2e" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M172 160 C179 152 184 144 187 135" stroke="#6e4a2e" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <ellipse cx="150" cy="325" rx="52" ry="6.5" fill="#6e4a2e" opacity=".22"/>
+            </g>
           </g>
           <g id="tacGrubu"></g>
         </svg>
@@ -1186,56 +1188,56 @@ const AYAR = {
   // 50 yer hazır — sadece dosya adlarını ve yazıları doldur. Son satır hariç virgüllere dikkat.
   galeriBaslik: "Zaman Tünelimiz 🕰️",
   fotograflar: [
-    { dosya: "", tarih: "Anı 1 — Tanıştığımız Gün", aciklama: "Her şeyin başladığı o gün." },
-    { dosya: "", tarih: "Anı 2 — İlk Fotoğrafımız", aciklama: "İkimiz de ne kadar heyecanlıydık." },
-    { dosya: "", tarih: "Anı 3", aciklama: "" },
-    { dosya: "", tarih: "Anı 4", aciklama: "" },
-    { dosya: "", tarih: "Anı 5", aciklama: "" },
-    { dosya: "", tarih: "Anı 6", aciklama: "" },
-    { dosya: "", tarih: "Anı 7", aciklama: "" },
-    { dosya: "", tarih: "Anı 8", aciklama: "" },
-    { dosya: "", tarih: "Anı 9", aciklama: "" },
-    { dosya: "", tarih: "Anı 10", aciklama: "" },
-    { dosya: "", tarih: "Anı 11", aciklama: "" },
-    { dosya: "", tarih: "Anı 12", aciklama: "" },
-    { dosya: "", tarih: "Anı 13", aciklama: "" },
-    { dosya: "", tarih: "Anı 14", aciklama: "" },
-    { dosya: "", tarih: "Anı 15", aciklama: "" },
-    { dosya: "", tarih: "Anı 16", aciklama: "" },
-    { dosya: "", tarih: "Anı 17", aciklama: "" },
-    { dosya: "", tarih: "Anı 18", aciklama: "" },
-    { dosya: "", tarih: "Anı 19", aciklama: "" },
-    { dosya: "", tarih: "Anı 20", aciklama: "" },
-    { dosya: "", tarih: "Anı 21", aciklama: "" },
-    { dosya: "", tarih: "Anı 22", aciklama: "" },
-    { dosya: "", tarih: "Anı 23", aciklama: "" },
-    { dosya: "", tarih: "Anı 24", aciklama: "" },
-    { dosya: "", tarih: "Anı 25", aciklama: "" },
-    { dosya: "", tarih: "Anı 26", aciklama: "" },
-    { dosya: "", tarih: "Anı 27", aciklama: "" },
-    { dosya: "", tarih: "Anı 28", aciklama: "" },
-    { dosya: "", tarih: "Anı 29", aciklama: "" },
-    { dosya: "", tarih: "Anı 30", aciklama: "" },
-    { dosya: "", tarih: "Anı 31", aciklama: "" },
-    { dosya: "", tarih: "Anı 32", aciklama: "" },
-    { dosya: "", tarih: "Anı 33", aciklama: "" },
-    { dosya: "", tarih: "Anı 34", aciklama: "" },
-    { dosya: "", tarih: "Anı 35", aciklama: "" },
-    { dosya: "", tarih: "Anı 36", aciklama: "" },
-    { dosya: "", tarih: "Anı 37", aciklama: "" },
-    { dosya: "", tarih: "Anı 38", aciklama: "" },
-    { dosya: "", tarih: "Anı 39", aciklama: "" },
-    { dosya: "", tarih: "Anı 40", aciklama: "" },
-    { dosya: "", tarih: "Anı 41", aciklama: "" },
-    { dosya: "", tarih: "Anı 42", aciklama: "" },
-    { dosya: "", tarih: "Anı 43", aciklama: "" },
-    { dosya: "", tarih: "Anı 44", aciklama: "" },
-    { dosya: "", tarih: "Anı 45", aciklama: "" },
-    { dosya: "", tarih: "Anı 46", aciklama: "" },
-    { dosya: "", tarih: "Anı 47", aciklama: "" },
-    { dosya: "", tarih: "Anı 48", aciklama: "" },
-    { dosya: "", tarih: "Anı 49", aciklama: "" },
-    { dosya: "", tarih: "Anı 50", aciklama: "" }
+    { dosya: "ani-1.jpg", tarih: "Anı 1 — Tanıştığımız Gün", aciklama: "Her şeyin başladığı o gün." },
+    { dosya: "ani-2.jpeg", tarih: "Anı 2 — İlk Fotoğrafımız", aciklama: "İkimiz de ne kadar heyecanlıydık." },
+    { dosya: "ani-3.jpeg", tarih: "Anı 3", aciklama: "" },
+    { dosya: "ani-4.jpeg", tarih: "Anı 4", aciklama: "" },
+    { dosya: "ani-5.jpeg", tarih: "Anı 5", aciklama: "" },
+    { dosya: "ani-6.jpeg", tarih: "Anı 6", aciklama: "" },
+    { dosya: "ani-7.jpeg", tarih: "Anı 7", aciklama: "" },
+    { dosya: "ani-8.jpeg", tarih: "Anı 8", aciklama: "" },
+    { dosya: "ani-9.jpeg", tarih: "Anı 9", aciklama: "" },
+    { dosya: "ani-10.jpeg", tarih: "Anı 10", aciklama: "" },
+    { dosya: "ani-11.jpeg", tarih: "Anı 11", aciklama: "" },
+    { dosya: "ani-12.jpeg", tarih: "Anı 12", aciklama: "" },
+    { dosya: "ani-13.jpeg", tarih: "Anı 13", aciklama: "" },
+    { dosya: "ani-14.jpeg", tarih: "Anı 14", aciklama: "" },
+    { dosya: "ani-15.jpeg", tarih: "Anı 15", aciklama: "" },
+    { dosya: "ani-16.jpeg", tarih: "Anı 16", aciklama: "" },
+    { dosya: "ani-17.jpeg", tarih: "Anı 17", aciklama: "" },
+    { dosya: "ani-18.jpeg", tarih: "Anı 18", aciklama: "" },
+    { dosya: "ani-19.jpeg", tarih: "Anı 19", aciklama: "" },
+    { dosya: "ani-20.jpeg", tarih: "Anı 20", aciklama: "" },
+    { dosya: "ani-21.jpeg", tarih: "Anı 21", aciklama: "" },
+    { dosya: "ani-22.jpeg", tarih: "Anı 22", aciklama: "" },
+    { dosya: "ani-23.jpeg", tarih: "Anı 23", aciklama: "" },
+    { dosya: "ani-24.jpeg", tarih: "Anı 24", aciklama: "" },
+    { dosya: "ani-25.jpeg", tarih: "Anı 25", aciklama: "" },
+    { dosya: "ani-26.jpeg", tarih: "Anı 26", aciklama: "" },
+    { dosya: "ani-27.jpeg", tarih: "Anı 27", aciklama: "" },
+    { dosya: "ani-28.jpeg", tarih: "Anı 28", aciklama: "" },
+    { dosya: "ani-29.jpeg", tarih: "Anı 29", aciklama: "" },
+    { dosya: "ani-30.jpeg", tarih: "Anı 30", aciklama: "" },
+    { dosya: "ani-31.jpeg", tarih: "Anı 31", aciklama: "" },
+    { dosya: "ani-32.jpeg", tarih: "Anı 32", aciklama: "" },
+    { dosya: "ani-33.jpeg", tarih: "Anı 33", aciklama: "" },
+    { dosya: "ani-34.jpeg", tarih: "Anı 34", aciklama: "" },
+    { dosya: "ani-35.jpeg", tarih: "Anı 35", aciklama: "" },
+    { dosya: "ani-36.jpeg", tarih: "Anı 36", aciklama: "" },
+    { dosya: "ani-37.jpeg", tarih: "Anı 37", aciklama: "" },
+    { dosya: "ani-38.jpeg", tarih: "Anı 38", aciklama: "" },
+    { dosya: "ani-39.jpeg", tarih: "Anı 39", aciklama: "" },
+    { dosya: "ani-40.jpeg", tarih: "Anı 40", aciklama: "" },
+    { dosya: "ani-41.jpeg", tarih: "Anı 41", aciklama: "" },
+    { dosya: "ani-42.jpeg", tarih: "Anı 42", aciklama: "" },
+    { dosya: "ani-43.jpeg", tarih: "Anı 43", aciklama: "" },
+    { dosya: "ani-44.jpeg", tarih: "Anı 44", aciklama: "" },
+    { dosya: "ani-45.jpeg", tarih: "Anı 45", aciklama: "" },
+    { dosya: "ani-46.jpeg", tarih: "Anı 46", aciklama: "" },
+    { dosya: "ani-47.jpeg", tarih: "Anı 47", aciklama: "" },
+    { dosya: "ani-48.jpeg", tarih: "Anı 48", aciklama: "" },
+    { dosya: "ani-49.jpeg", tarih: "Anı 49", aciklama: "" },
+    { dosya: "ani-50.jpeg", tarih: "Anı 50", aciklama: "" }
   ],
 
   // 6b) "BİTANEM ARTIK 2 YAŞ BÜYÜK" bölümü — 22 sıralı fotoğraf
@@ -1769,34 +1771,43 @@ document.querySelectorAll(".hediye3").forEach(h => {
 /* kalp taç: kalp eğrisinin içine sarı çiçekler diz */
 (function agacKur(){
   const tac = $("#tacGrubu");
-  const merkezX = 150, merkezY = 110, xOlcek = 82, yOlcek = 74;
+  const merkezX = 150, merkezY = 100, xOlcek = 100, yOlcek = 88;
   function kalpIci(x, y){
     const a = x * x + y * y - 1;
     return a * a * a - x * x * y * y * y <= 0;
   }
-  function miniCicek(r, acik){
-    const petal = acik ? "#f6c445" : "#e8a52a";
+  function miniCicek(r, ton){
+    /* ton: 0 küçük dolgu, 1 açık sarı, 2 altın */
+    const petal = ton === 0 ? "#f3c95e" : (ton === 1 ? "#f6c445" : "#e8a52a");
+    const merkezR = ton === 0 ? r * .3 : r * .4;
     let taclar = "";
     for (let k = 0; k < 6; k++)
-      taclar += `<ellipse cx="0" cy="${(-r * .6).toFixed(1)}" rx="${(r * .34).toFixed(1)}" ry="${(r * .58).toFixed(1)}" fill="${petal}" transform="rotate(${k * 60})"/>`;
-    return taclar + `<circle r="${(r * .36).toFixed(1)}" fill="#6b4517"/>`;
+      taclar += `<ellipse cx="0" cy="${(-r * .6).toFixed(1)}" rx="${(r * .36).toFixed(1)}" ry="${(r * .6).toFixed(1)}" fill="${petal}" transform="rotate(${k * 60})"/>`;
+    return taclar + `<circle r="${merkezR.toFixed(1)}" fill="${ton === 0 ? "#8a5c1e" : "#5f3d14"}"/>`;
   }
-  const cicekler = [];
-  let deneme = 0;
-  while (cicekler.length < 300 && deneme < 12000) {
-    deneme++;
-    const x = (Math.random() * 2.9 - 1.45), y = (Math.random() * 2.7 - 1.3);
-    if (!kalpIci(x, -y)) continue;
-    cicekler.push({ x: merkezX + x * xOlcek, y: merkezY + y * yOlcek });
+  function ornekle(adet, listeye){
+    let deneme = 0;
+    while (listeye.length < adet && deneme < 20000) {
+      deneme++;
+      const x = (Math.random() * 2.9 - 1.45), y = (Math.random() * 2.7 - 1.3);
+      if (!kalpIci(x, -y)) continue;
+      listeye.push({ x: merkezX + x * xOlcek, y: merkezY + y * yOlcek });
+    }
   }
+  const buyukler = [], dolgular = [];
+  ornekle(310, buyukler);
+  ornekle(360, dolgular);      /* 50 küçük dolgu */
+  const cicekler = [
+    ...dolgular.slice(310).map(c => ({ ...c, r: 3.4 + Math.random() * 2.2, ton: 0 })),
+    ...buyukler.map(c => ({ ...c, r: 6 + Math.random() * 5, ton: Math.random() > .5 ? 1 : 2 }))
+  ];
   cicekler.sort((a, b) => b.y - a.y);
   let svgIc = "";
   cicekler.forEach((c, i) => {
-    const r = 4.6 + Math.random() * 4.4;
-    const gecikme = (1.25 + i * 0.005 + Math.random() * .07).toFixed(2);
+    const gecikme = (1.25 + i * 0.0042 + Math.random() * .06).toFixed(2);
     svgIc += `<g transform="translate(${c.x.toFixed(1)} ${c.y.toFixed(1)})">
       <g class="cicekcik" style="--d:${gecikme}s">
-        <g transform="rotate(${(Math.random() * 60 - 30).toFixed(0)})">${miniCicek(r, Math.random() > .3)}</g>
+        <g transform="rotate(${(Math.random() * 60 - 30).toFixed(0)})">${miniCicek(c.r, c.ton)}</g>
       </g></g>`;
   });
   tac.innerHTML = svgIc;
@@ -1805,7 +1816,7 @@ document.querySelectorAll(".hediye3").forEach(h => {
     const d = document.createElement("span");
     d.className = "dusen";
     const r = 6 + Math.random() * 4;
-    d.innerHTML = `<svg width="${r*3}" height="${r*3}" viewBox="${-r*1.5} ${-r*1.5} ${r*3} ${r*3}">${miniCicek(r, Math.random() > .3)}</svg>`;
+    d.innerHTML = `<svg width="${r*3}" height="${r*3}" viewBox="${-r*1.5} ${-r*1.5} ${r*3} ${r*3}">${miniCicek(r, Math.random() > .4 ? 1 : 2)}</svg>`;
     d.style.left = (16 + Math.random() * 42) + "%";
     d.style.top = (20 + Math.random() * 18) + "%";
     d.style.setProperty("--dx", (Math.random() * 70 - 45) + "px");

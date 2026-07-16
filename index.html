@@ -1247,7 +1247,7 @@ const AYAR = {
   takvimFoto: "takvim.jpeg",          // işaretli güne oturan fotoğraf (repoya bu adla yükle)
 
   // 1) Giriş
-  kavisYazi: "FAV DATE",               // tepedeki kavisli büyük yazı
+  kavisYazi: "bugünün hissettirdiği huzur",   // tepedeki kavisli büyük yazı (uzunsa kendini küçültür)
   girisAlt: "seninle ♡",
   favFoto: "fav.jpeg",     // Fav Date arkasındaki fotoğraf (repoya bu adla yükle)
   girisMetin: "Bugün senin günün aşkım. Sana ekranda küçük bir sürpriz hazırladım; aşağı kaydır, her şey seni bekliyor.",
@@ -1411,8 +1411,8 @@ const AYAR = {
 
   // 9) Sarı zarf → tam ekran ağaç sahnesi (en son bölüm)
   agacZarfBaslik: "Son bir şey daha var...",
-  agacZarfNotu: "İyi ki doğdun aşkım, iyi ki senin ufaklığınım. Umarım her doğum gününde ufaklığın olurum. Seni çok seviyorum bitanem. 💛",
-  agacNotu: "Sarı çiçekler, hayatımın aşkına...|Güvenli bir yer seçebilseydim,|orası senin yanın olurdu.|Ve o güne kadar her saniyeyi sayıyorum:",
+  agacZarfNotu: "Sana bir şey yazdım, aç beni 💛",
+  agacNotu: "İyi ki doğdun aşkım,|iyi ki senin ufaklığınım.|Umarım her doğum gününde|ufaklığın olurum.|Seni çok seviyorum bitanem. 💛",
   sayacOnEk: "Bir sonraki doğum gününe",   // sayaç satırının başındaki yazı
   sayacTarih: "2027-07-24T00:00:00",       // 24 Temmuz 2027
   sayacBittiYazi: "Doğum günün kutlu olsun! 🎉"
@@ -1447,6 +1447,11 @@ $("#takvimGovde").innerHTML = AYAR.takvimHaftalar.map(hafta =>
   }).join("")}</tr>`).join("");
 $("#kavisYazi").textContent = AYAR.kavisYazi;
 $("#kavisGolge").textContent = AYAR.kavisYazi;
+(function(){
+  const uz = AYAR.kavisYazi.length;
+  const boyut = uz > 14 ? Math.max(21, Math.round(42 * 14 / uz)) : 42;
+  document.querySelectorAll(".kavis text").forEach(t => t.style.fontSize = boyut + "px");
+})();
 $("#girisAlt").textContent = AYAR.girisAlt;
 $("#girisMetin").textContent = AYAR.girisMetin;
 if (AYAR.favFoto) $("#girisFon").style.backgroundImage = `url('${AYAR.favFoto}')`;

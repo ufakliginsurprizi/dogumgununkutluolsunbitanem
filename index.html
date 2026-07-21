@@ -647,7 +647,13 @@ body.tunelde{overflow:hidden;height:100svh}
   mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
 }
+.film-serit{align-items:center}
 .film-serit::-webkit-scrollbar{display:none}
+.serit-kart.bolucu{
+  flex:0 0 min(58vw,270px);aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;
+  font-family:'Caveat',cursive;font-weight:700;font-size:clamp(1.5rem,6vw,2rem);
+  color:var(--kirmizi);text-align:center;line-height:1.25;padding:20px;
+}
 .serit-kart{
   flex:0 0 min(76vw,330px);scroll-snap-align:center;position:relative;
   background:var(--kagit);border-radius:4px;padding:12px 12px 13px;color:var(--murekkep);
@@ -1258,83 +1264,83 @@ const AYAR = {
   // 6) Anılar — Zaman Tüneli galerisi
   // İKİNCİ ŞİFRE: Zaman Tüneli'ni açmak için sorulur.
   anilarSifre: "1302",
-  anilarSifreIpucu: "first kiss 😘",
+  anilarSifreIpucu: "first kiss",
   // Her anı için: dosya (fotoğraf adı), tarih (kalın başlık), aciklama (altındaki yazı).
   // 62 yer hazır — sadece dosya adlarını ve yazıları doldur. Son satır hariç virgüllere dikkat.
   galeriBaslik: "Zaman Tünelimiz 🕰️",
   fotograflar: [
-    { dosya: "ani-1.jpg", tarih: "Anı 1 — Tanıştığımız Gün", aciklama: "Her şeyin başladığı o gün." },
-    { dosya: "ani-2.jpeg", tarih: "Anı 2 — İlk Fotoğrafımız", aciklama: "İkimiz de ne kadar heyecanlıydık." },
-    { dosya: "ani-3.jpeg", tarih: "Anı 3", aciklama: "" },
-    { dosya: "ani-4.jpeg", tarih: "Anı 4", aciklama: "" },
-    { dosya: "ani-5.jpeg", tarih: "Anı 5", aciklama: "" },
-    { dosya: "ani-6.jpeg", tarih: "Anı 6", aciklama: "" },
-    { dosya: "ani-7.jpeg", tarih: "Anı 7", aciklama: "" },
-    { dosya: "ani-8.jpeg", tarih: "Anı 8", aciklama: "" },
-    { dosya: "ani-9.jpeg", tarih: "Anı 9", aciklama: "" },
-    { dosya: "ani-10.jpeg", tarih: "Anı 10", aciklama: "" },
-    { dosya: "ani-11.jpeg", tarih: "Anı 11", aciklama: "" },
-    { dosya: "ani-12.jpeg", tarih: "Anı 12", aciklama: "" },
-    { dosya: "ani-13.jpeg", tarih: "Anı 13", aciklama: "" },
-    { dosya: "ani-14.jpeg", tarih: "Anı 14", aciklama: "" },
-    { dosya: "ani-15.jpeg", tarih: "Anı 15", aciklama: "" },
-    { dosya: "ani-16.jpeg", tarih: "Anı 16", aciklama: "" },
-    { dosya: "ani-17.jpeg", tarih: "Anı 17", aciklama: "" },
-    { dosya: "ani-18.jpeg", tarih: "Anı 18", aciklama: "" },
-    { dosya: "ani-19.jpeg", tarih: "Anı 19", aciklama: "" },
-    { dosya: "ani-20.jpeg", tarih: "Anı 20", aciklama: "" },
-    { dosya: "ani-21.jpeg", tarih: "Anı 21", aciklama: "" },
-    { dosya: "ani-22.jpeg", yatay: true, tarih: "Anı 22", aciklama: "" },
-    { dosya: "ani-23.jpeg", yatay: true, tarih: "Anı 23", aciklama: "" },
-    { dosya: "ani-24.jpeg", tarih: "Anı 24", aciklama: "" },
-    { dosya: "ani-25.jpeg", tarih: "Anı 25", aciklama: "" },
-    { dosya: "ani-26.jpeg", tarih: "Anı 26", aciklama: "" },
-    { dosya: "ani-27.jpeg", tarih: "Anı 27", aciklama: "" },
-    { dosya: "ani-28.jpeg", tarih: "Anı 28", aciklama: "" },
-    { dosya: "ani-29.jpeg", tarih: "Anı 29", aciklama: "" },
-    { dosya: "ani-30.jpeg", tarih: "Anı 30", aciklama: "" },
-    { dosya: "ani-31.jpeg", tarih: "Anı 31", aciklama: "" },
-    { dosya: "ani-32.jpeg", tarih: "Anı 32", aciklama: "" },
-    { dosya: "ani-33.jpeg", tarih: "Anı 33", aciklama: "" },
-    { dosya: "ani-34.jpeg", tarih: "Anı 34", aciklama: "" },
-    { dosya: "ani-35.jpeg", yatay: true, tarih: "Anı 35", aciklama: "" },
-    { dosya: "ani-36.jpeg", yatay: true, tarih: "Anı 36", aciklama: "" },
-    { dosya: "ani-37.jpeg", yatay: true, tarih: "Anı 37", aciklama: "" },
-    { dosya: "ani-38.jpeg", tarih: "Anı 38", aciklama: "" },
-    { dosya: "ani-39.jpeg", tarih: "Anı 39", aciklama: "" },
-    { dosya: "ani-40.jpeg", tarih: "Anı 40", aciklama: "" },
-    { dosya: "ani-41.jpeg", yatay: true, tarih: "Anı 41", aciklama: "" },
-    { dosya: "ani-42.jpeg", tarih: "Anı 42", aciklama: "" },
-    { dosya: "ani-43.jpeg", yatay: true, tarih: "Anı 43", aciklama: "" },
-    { dosya: "ani-44.jpeg", tarih: "Anı 44", aciklama: "" },
-    { dosya: "ani-45.jpeg", tarih: "Anı 45", aciklama: "" },
-    { dosya: "ani-46.jpeg", tarih: "Anı 46", aciklama: "" },
-    { dosya: "ani-47.jpeg", tarih: "Anı 47", aciklama: "" },
-    { dosya: "ani-48.jpeg", tarih: "Anı 48", aciklama: "" },
-    { dosya: "ani-49.jpeg", tarih: "Anı 49", aciklama: "" },
-    { dosya: "ani-50.jpeg", tarih: "Anı 50", aciklama: "" },
-    { dosya: "ani-51.jpeg", tarih: "Anı 51", aciklama: "" },
-    { dosya: "ani-52.jpeg", tarih: "Anı 52", aciklama: "" },
-    { dosya: "ani-53.jpeg", tarih: "Anı 53", aciklama: "" },
-    { dosya: "ani-54.jpeg", yatay: true, tarih: "Anı 54", aciklama: "" },
-    { dosya: "ani-55.jpeg", yatay: true, tarih: "Anı 55", aciklama: "" },
-    { dosya: "ani-56.jpeg", tarih: "Anı 56", aciklama: "" },
-    { dosya: "ani-57.jpeg", tarih: "Anı 57", aciklama: "" },
-    { dosya: "ani-58.jpeg", tarih: "Anı 58", aciklama: "" },
-    { dosya: "ani-59.jpeg", tarih: "Anı 59", aciklama: "" },
-    { dosya: "ani-60.jpeg", yatay: true, tarih: "Anı 60", aciklama: "" },
-    { dosya: "ani-61.jpeg", tarih: "Anı 61", aciklama: "" },
-    { dosya: "ani-62.jpeg", tarih: "Anı 62", aciklama: "" }
+    { dosya: "ani-1.jpg", tarih: "", aciklama: "" },
+    { dosya: "ani-2.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-3.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-4.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-5.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-6.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-7.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-8.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-9.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-10.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-11.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-12.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-13.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-14.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-15.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-16.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-17.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-18.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-19.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-20.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-21.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-22.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-23.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-24.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-25.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-26.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-27.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-28.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-29.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-30.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-31.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-32.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-33.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-34.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-35.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-36.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-37.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-38.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-39.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-40.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-41.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-42.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-43.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-44.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-45.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-46.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-47.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-48.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-49.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-50.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-51.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-52.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-53.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-54.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-55.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-56.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-57.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-58.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-59.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-60.jpeg", yatay: true, tarih: "", aciklama: "" },
+    { dosya: "ani-61.jpeg", tarih: "", aciklama: "" },
+    { dosya: "ani-62.jpeg", tarih: "", aciklama: "" }
   ],
 
   // 6b) "BİTANEM ARTIK 2 YAŞ BÜYÜK" albümü — 9 fotoğraf + 3 video (sıralı)
   yasBaslik: "BİTANEM ARTIK 2 YAŞ BÜYÜK",
   yasFotolari: [
     { dosya: "yas-1.jpeg", yazi: "" },
-    { dosya: "yas-2.jpeg", yazi: "" },
+    { dosya: "yas-2.jpeg", yatay: true, yazi: "" },
     { dosya: "yas-3.jpeg", yazi: "" },
-    { dosya: "yas-4.jpeg", yazi: "" },
-    { dosya: "yas-5.jpeg", yazi: "" },
+    { dosya: "yas-4.jpeg", yatay: true, yazi: "" },
+    { dosya: "yas-5.jpeg", yatay: true, yazi: "" },
     { dosya: "yas-6.jpeg", yazi: "" },
     { dosya: "yas-7.jpeg", yazi: "" },
     { dosya: "yas-8.jpeg", yazi: "" },
@@ -1347,6 +1353,8 @@ const AYAR = {
   // 6c) Videolarımız bölümü — 10 video, altlarına yazı yazabilirsin
   // Video dosyalarını da repoya yükle (her biri 100MB altı olmalı, 25MB altı idealdir).
   videoBaslik: "Videolarımız 🎬",
+  videoBolucuSira: 5,                          // bu sıradaki videodan önce ayraç kartı gelir
+  videoBolucuYazi: "TikTok Videolarımız 🎵",
   videolar: [
     { dosya: "video-1.mp4", yazi: "Video 1 için yazın buraya" },
     { dosya: "video-2.mp4", dikey: true, yazi: "" }, { dosya: "video-3.mp4", dikey: true, yazi: "" }, { dosya: "video-4.mp4", dikey: true, yazi: "" }, { dosya: "video-5.mp4", yazi: "" },
@@ -1367,14 +1375,14 @@ const AYAR = {
   ajandaKapakYazi: "erasmus 2027",
   ajandaSayfalar: [
     { baslik: "", tarih: "", yazi: "Bitanem, umarım Erasmus'ta bu ajandayı birlikte doldururuz. ❤️", cikartmalar: ["✈️","🎒","🇪🇺","❤️"] },
-    { baslik: "Amsterdam", tarih: "2 – 5 Nisan 2027", yazi: "", cikartmalar: ["🌷","🚲","🧀","🇳🇱"] },
-    { baslik: "Budapeşte", tarih: "23 – 26 Nisan 2027", yazi: "", cikartmalar: ["🏰","♨️","🌉","🇭🇺"] },
-    { baslik: "Kuzey Işıkları", tarih: "7 – 11 Mayıs 2027", yazi: "", cikartmalar: ["🌌","❄️","🦌","🌠"] },
-    { baslik: "Venedik", tarih: "4 – 7 Haziran 2027", yazi: "", cikartmalar: ["🚤","🎭","🍝","🇮🇹"] },
-    { baslik: "Como", tarih: "8 – 10 Haziran 2027", yazi: "", cikartmalar: ["🏞️","⛵","🍋"] },
-    { baslik: "Roma", tarih: "11 – 14 Haziran 2027", yazi: "", cikartmalar: ["🏛️","🍕","⛲"] },
-    { baslik: "İbiza", tarih: "2 – 6 Temmuz 2027", yazi: "", cikartmalar: ["🏝️","🎧","🌅","🍹"] },
-    { baslik: "Amsterdam", tarih: "27 – 30 Temmuz 2027", yazi: "Ve başladığımız yerde bitiriyoruz... 💚", cikartmalar: ["🌷","🌇","🚲","❤️"] }
+    { baslik: "Amsterdam", tarih: "", yazi: "", cikartmalar: ["🌷","🚲","🧀","🇳🇱"] },
+    { baslik: "Budapeşte", tarih: "", yazi: "", cikartmalar: ["🏰","♨️","🌉","🇭🇺"] },
+    { baslik: "Kuzey Işıkları", tarih: "", yazi: "", cikartmalar: ["🌌","❄️","🦌","🌠"] },
+    { baslik: "Venedik", tarih: "", yazi: "", cikartmalar: ["🚤","🎭","🍝","🇮🇹"] },
+    { baslik: "Como", tarih: "", yazi: "", cikartmalar: ["🏞️","⛵","🍋"] },
+    { baslik: "Roma", tarih: "", yazi: "", cikartmalar: ["🏛️","🍕","⛲"] },
+    { baslik: "İbiza", tarih: "", yazi: "", cikartmalar: ["🏝️","🎧","🌅","🍹"] },
+    { baslik: "Amsterdam", tarih: "", yazi: "Ve başladığımız yerde bitiriyoruz... 💚", cikartmalar: ["🌷","🌇","🚲","❤️"] }
   ],
   erasmusFotolari: [
     { dosya: "erasmus-1.jpeg", baslik: "1. Durak — Yola Çıkış", yazi: "Her şey o biletle başladı." },
@@ -1386,8 +1394,7 @@ const AYAR = {
     { dosya: "erasmus-7.jpeg", baslik: "7. Durak", yazi: "" },
     { dosya: "erasmus-8.jpeg", baslik: "8. Durak", yazi: "" },
     { dosya: "erasmus-9.jpeg", baslik: "9. Durak", yazi: "" },
-    { dosya: "erasmus-10.jpeg", baslik: "10. Durak", yazi: "" },
-    { dosya: "erasmus-11.jpeg", baslik: "11. Durak — Ve devamı...", yazi: "" }
+    { dosya: "erasmus-10.jpeg", baslik: "10. Durak — Ve devamı...", yazi: "" }
   ],
 
 
@@ -1397,9 +1404,9 @@ const AYAR = {
   hediyeAdlari: ["Pasta", "İlk Hediyem", "2. Hediyem"],
   // Her hediyeye tıklanınca açılan sayfalar — metinde paragrafları | ile ayır:
   hediyeSayfalari: [
-    { baslik: "🍰 Pasta", metin: "Buraya pastayla ilgili yazmak istediklerini yaz.|Mesela: bu pastayı sana kendi ellerimle yapacağım, dilimi büyük kesmeyi unutma..." },
-    { baslik: "🎁 İlk Hediyem", metin: "İlk hediyenle ilgili notun buraya.|Küçük bir ipucu bile yazabilirsin, açarken okusun." },
-    { baslik: "📝 2. Hediyem", metin: "İkinci hediyenin notu buraya.|İstediğin kadar paragraf ekleyebilirsin." }
+    { baslik: "🍰 Pasta", metin: "Sana hazırlayacağım pastayı parmaklarını yalayarak yiyeceksin. 😋" },
+    { baslik: "🎁 İlk Hediyem", metin: "Burda sana hediyeleri söyleyemiyorum ama ipuçları burda gizli. 🤫" },
+    { baslik: "📝 2. Hediyem", metin: "Burda sana hediyeleri söyleyemiyorum ama ipuçları burda gizli. 🤫" }
   ],
   // Çiçek animasyonu:
   // 1) VİDEO MODU (senin Gemini videon): dosya adını yaz, tetiklenince tam ekran oynar.
@@ -1468,7 +1475,7 @@ AYAR.fotograflar.forEach((f, i) => {
   k.innerHTML = `${f.dosya
       ? `<img src="${f.dosya}" alt="${f.tarih || "anı"}" loading="lazy">`
       : `<div class="bos">Fotoğraf gelecek 💚 (${i + 1})</div>`}
-    <div class="tarih">${f.tarih || ""}</div>
+    ${f.tarih ? `<div class="tarih">${f.tarih}</div>` : ""}
     ${f.aciklama ? `<div class="aciklama">${f.aciklama}</div>` : ""}`;
   filmSerit.appendChild(k);
 });
@@ -1569,7 +1576,7 @@ function albumAc(tip){
     AYAR.yasFotolari.forEach((f, i) => {
       const k = document.createElement("div");
       const videoMu = /\.(mp4|webm|mov)$/i.test(f.dosya || "");
-      k.className = "serit-kart" + (videoMu ? " video-tip" : "");
+      k.className = "serit-kart" + (videoMu ? " video-tip" : "") + (f.yatay ? " yatay" : "");
       k.innerHTML = `<div class="no">${i + 1}</div>
         ${f.dosya
           ? (videoMu
@@ -1582,6 +1589,12 @@ function albumAc(tip){
   } else {
     $("#albumBaslik").textContent = AYAR.videoBaslik;
     AYAR.videolar.forEach((v, i) => {
+      if (AYAR.videoBolucuYazi && i + 1 === AYAR.videoBolucuSira) {
+        const b = document.createElement("div");
+        b.className = "serit-kart bolucu";
+        b.innerHTML = `<div>${AYAR.videoBolucuYazi}</div>`;
+        serit.appendChild(b);
+      }
       const k = document.createElement("div");
       k.className = "serit-kart video-tip" + (v.dikey ? " dikey" : "");
       k.innerHTML = `${v.dosya

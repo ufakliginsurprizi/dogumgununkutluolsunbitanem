@@ -968,6 +968,19 @@ table.takvim{width:100%;border-collapse:collapse;table-layout:fixed}
 /* sarı zarfın uzun notu için sığdırma */
 .zarf.sari .mektupcuk{font-size:.98rem;line-height:1.3;padding:10px 12px;align-items:flex-start;text-align:center}
 
+/* gümüş sürpriz kutusu */
+.kutu-gumus .gvd{background:linear-gradient(180deg,#f2f3f5,#d7dade)}
+.kutu-gumus .serit{background:linear-gradient(180deg,#c3c9d2,#a9b0bb)}
+.kutu-gumus .kpk{background:linear-gradient(180deg,#e8eaee,#cfd3d9)}
+.kutu-gumus .fiyonk{border-color:#aab1bc}
+.kutu-gumus .dugum{background:#aab1bc}
+/* kolye ipucu: sadece 3. hediyenin notunda, kenarlardan usulca sarkar */
+.hediye-sayfa .kolye{display:none;position:absolute;pointer-events:none;z-index:1;opacity:.8}
+.hediye-sayfa.kolyeli .kolye{display:block}
+.kolye svg{display:block;width:100%;height:100%}
+.kolye.k1{top:-6px;right:-4px;width:110px;height:110px;transform:rotate(6deg)}
+.kolye.k2{bottom:-5px;left:-6px;width:84px;height:84px;transform:rotate(-172deg)}
+
 canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
 .muzik-dugme{position:fixed;top:16px;right:16px;z-index:95;width:44px;height:44px;border-radius:50%;border:1px solid rgba(250,243,227,.3);background:rgba(14,34,19,.6);color:var(--krem);font-size:1.1rem;cursor:pointer;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
 @media (prefers-reduced-motion: reduce){
@@ -1098,27 +1111,24 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
     <div class="dantel-ust" id="hediyeUst"></div>
     <div class="hediye-sira">
       <div class="hediye3 belir b1" data-hediye="0">
-        <div class="ucanlar"><span>🍓</span><span>🕯️</span><span>🍒</span></div>
-        <div class="mini-pasta">
-          <div class="mp-tabak"></div>
-          <div class="mp-kat k1"></div><div class="mp-recel r1"></div>
-          <div class="mp-kat k2"></div><div class="mp-recel r2"></div>
-          <div class="mp-kat k3"></div>
-          <div class="mp-cilekler">🍓🍓🍓</div>
+        <div class="ucanlar" style="color:#8fb0d4"><span>♪</span><span>♫</span><span>♩</span></div>
+        <div class="kutu3 kutu-mavi">
+          <div class="gvd"></div><div class="serit"></div><div class="kpk"></div>
+          <div class="fiyonk"></div><div class="dugum"></div>
         </div>
         <div class="ad" id="hediyeAd0"></div>
       </div>
       <div class="hediye3 belir b2" data-hediye="1">
-        <div class="ucanlar" style="color:#8fb0d4"><span>♪</span><span>♫</span><span>♩</span></div>
-        <div class="kutu3 kutu-mavi">
+        <div class="ucanlar"><span>🖼️</span><span>🎨</span><span>🖌️</span></div>
+        <div class="kutu3 kutu-kirmizi">
           <div class="gvd"></div><div class="serit"></div><div class="kpk"></div>
           <div class="fiyonk"></div><div class="dugum"></div>
         </div>
         <div class="ad" id="hediyeAd1"></div>
       </div>
       <div class="hediye3 belir b3" data-hediye="2">
-        <div class="ucanlar"><span>🖼️</span><span>🎨</span><span>🖌️</span></div>
-        <div class="kutu3 kutu-kirmizi">
+        <div class="ucanlar" style="color:#c9ced6"><span>✦</span><span>✧</span><span>✦</span></div>
+        <div class="kutu3 kutu-gumus">
           <div class="gvd"></div><div class="serit"></div><div class="kpk"></div>
           <div class="fiyonk"></div><div class="dugum"></div>
         </div>
@@ -1345,6 +1355,8 @@ const AYAR = {
     { dosya: "yas-7.jpeg", yazi: "" },
     { dosya: "yas-8.jpeg", yazi: "" },
     { dosya: "yas-9.jpeg", yazi: "" },
+    { dosya: "yas-10.jpeg", yatay: true, yazi: "" },
+    { dosya: "yas-11.jpeg", yatay: true, yazi: "" },
     { dosya: "yas-video-1.mp4", yazi: "" },
     { dosya: "yas-video-2.mp4", yazi: "" },
     { dosya: "yas-video-3.mp4", yazi: "" }
@@ -1401,12 +1413,13 @@ const AYAR = {
   // 8) Hediyeler (en sondaki dantel kart)
   hediyeUst: "Bunlar",
   hediyeAlt: "Sana özel hediyeler!",
-  hediyeAdlari: ["Pasta", "İlk Hediyem", "2. Hediyem"],
+  hediyeAdlari: ["İlk Hediyem", "2. Hediyem", "Ufak Bir Sürpriz"],
   // Her hediyeye tıklanınca açılan sayfalar — metinde paragrafları | ile ayır:
   hediyeSayfalari: [
-    { baslik: "🍰 Pasta", metin: "Sana hazırlayacağım pastayı parmaklarını yalayarak yiyeceksin. 😋" },
     { baslik: "🎁 İlk Hediyem", metin: "Burda sana hediyeleri söyleyemiyorum ama ipuçları burda gizli. 🤫" },
-    { baslik: "📝 2. Hediyem", metin: "Burda sana hediyeleri söyleyemiyorum ama ipuçları burda gizli. 🤫" }
+    { baslik: "🎁 İlk Hediyem", metin: "Burda sana hediyeleri söyleyemiyorum ama ipuçları burda gizli. 🤫" },
+    { baslik: "🎀 2. Hediyem", metin: "Burda sana hediyeleri söyleyemiyorum ama ipuçları burda gizli. 🤫" },
+    { baslik: "🤍 Ufak Bir Sürpriz", metin: "Bunun üstüne gerçekten çok uğraştım.|Ne olduğunu söylemeyeceğim... ama kenarlara iyi bak. 🤫" }
   ],
   // Çiçek animasyonu:
   // 1) VİDEO MODU (senin Gemini videon): dosya adını yaz, tetiklenince tam ekran oynar.
@@ -2019,6 +2032,16 @@ function hediyeSayfaAc(i){
   $("#hediyeSayfaBaslik").textContent = s.baslik;
   $("#hediyeSayfaMetin").innerHTML = (s.metin || "").split("|").map(p => `<p style="margin-bottom:8px">${p.trim()}</p>`).join("");
   $("#kartLaleleri").innerHTML = laleSvg(lalePaletleri[1]) + laleSvg(lalePaletleri[0]) + laleSvg(lalePaletleri[3]);
+  const zincir = `<svg viewBox="0 0 100 100" fill="none">
+    <path d="M-6 34 C22 52 48 60 106 44" stroke="#9aa1ac" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="0.1 5.4"/>
+    <path d="M-6 32.5 C22 50.5 48 58.5 106 42.5" stroke="#e7eaef" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="0.1 5.4"/>
+    <path d="M46 57 l4 7 4 -7 -4 9 z" fill="#c3c9d2" stroke="#9aa1ac" stroke-width="1"/>
+    <circle cx="46" cy="56" r="1.5" fill="#e7eaef" stroke="#9aa1ac" stroke-width=".8"/>
+  </svg>`;
+  const kart = document.querySelector("#hediyeSayfa .hediye-kart");
+  if (!kart.querySelector(".kolye"))
+    kart.insertAdjacentHTML("beforeend", `<span class="kolye k1">${zincir}</span><span class="kolye k2">${zincir}</span>`);
+  $("#hediyeSayfa").classList.toggle("kolyeli", i === 2);
   $("#hediyeSayfa").classList.add("acik");
   document.body.classList.add("tunelde");
 }

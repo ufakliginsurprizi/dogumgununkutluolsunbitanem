@@ -956,7 +956,9 @@ table.takvim{width:100%;border-collapse:collapse;table-layout:fixed}
 .takvim-not{align-self:flex-end;font-family:'Caveat',cursive;font-weight:700;font-size:clamp(1.25rem,4.8vw,1.6rem);color:#c2453a;transform:rotate(-2.5deg);margin-top:2px}
 
 /* Fav Date: fotoğraflı zemin */
-#giris{overflow:hidden}
+#giris{overflow:hidden;justify-content:flex-start;padding-top:14svh}
+#giris .kavis{margin-bottom:6px}
+#giris .ok{margin-top:auto;margin-bottom:6px}
 .giris-fon{position:absolute;inset:0;background-size:cover;background-position:center;background-image:linear-gradient(180deg,var(--cimen-koyu),var(--cimen))}
 .giris-perde{position:absolute;inset:0;background:linear-gradient(180deg, rgba(8,20,11,.34) 0%, rgba(8,20,11,.48) 55%, rgba(8,20,11,.72) 100%)}
 #giris > *:not(.giris-fon):not(.giris-perde){position:relative;z-index:2}
@@ -1049,7 +1051,6 @@ canvas#fx{position:fixed;inset:0;pointer-events:none;z-index:90}
     <text class="golge"><textPath href="#yay" startOffset="50%" text-anchor="middle" id="kavisGolge"></textPath></text>
     <text><textPath href="#yay" startOffset="50%" text-anchor="middle" id="kavisYazi"></textPath></text>
   </svg>
-  <div class="altbaslik belir b1" id="girisAlt"></div>
   <p class="giris-metin belir b2" id="girisMetin"></p>
   <div class="ok belir b3">⌄</div>
 </section>
@@ -1265,9 +1266,8 @@ const AYAR = {
 
   // 1) Giriş
   kavisYazi: "bugünün hissettirdiği huzur",   // tepedeki kavisli büyük yazı (uzunsa kendini küçültür)
-  girisAlt: "seninle ♡",
   favFoto: "fav.jpeg",     // Fav Date arkasındaki fotoğraf (repoya bu adla yükle)
-  girisMetin: "Bugün senin günün aşkım. Sana ekranda küçük bir sürpriz hazırladım; aşağı kaydır, her şey seni bekliyor.",
+  girisMetin: "Bugün orada o kadar huzurlu ve mutluyduk ki, o anı seninle tekrar tekrar yaşarım. Birbirimize bana baktığın gibi bakalım bitanem.",
 
 
 
@@ -1346,7 +1346,7 @@ const AYAR = {
   // 6b) "BİTANEM ARTIK 2 YAŞ BÜYÜK" albümü — 9 fotoğraf + 3 video (sıralı)
   yasBaslik: "BİTANEM ARTIK 2 YAŞ BÜYÜK",
   yasFotolari: [
-    { dosya: "yas-1.jpeg", yazi: "" },
+    { dosya: "yas-1.jpeg", yazi: "hihihihi" },
     { dosya: "yas-2.jpeg", yatay: true, yazi: "" },
     { dosya: "yas-3.jpeg", yazi: "" },
     { dosya: "yas-4.jpeg", yatay: true, yazi: "" },
@@ -1416,10 +1416,9 @@ const AYAR = {
   hediyeAdlari: ["İlk Hediyem", "2. Hediyem", "Ufak Bir Sürpriz"],
   // Her hediyeye tıklanınca açılan sayfalar — metinde paragrafları | ile ayır:
   hediyeSayfalari: [
-    { baslik: "🎁 İlk Hediyem", metin: "Burda sana hediyeleri söyleyemiyorum ama ipuçları burda gizli. 🤫" },
-    { baslik: "🎁 İlk Hediyem", metin: "Burda sana hediyeleri söyleyemiyorum ama ipuçları burda gizli. 🤫" },
-    { baslik: "🎀 2. Hediyem", metin: "Burda sana hediyeleri söyleyemiyorum ama ipuçları burda gizli. 🤫" },
-    { baslik: "🤍 Ufak Bir Sürpriz", metin: "Bunun üstüne gerçekten çok uğraştım.|Ne olduğunu söylemeyeceğim... ama kenarlara iyi bak. 🤫" }
+    { baslik: "İlk Hediyem", metin: "Sana almış olduğum hediyeler hakkında ipuçları buralarda bulunuyor, bakalım bulabilecek misin aşkım." },
+    { baslik: "2. Hediyem", metin: "Sana almış olduğum hediyeler hakkında ipuçları buralarda bulunuyor, bakalım bulabilecek misin aşkım." },
+    { baslik: "Ufak Bir Sürpriz", metin: "Sana almış olduğum hediyeler hakkında ipuçları buralarda bulunuyor, bakalım bulabilecek misin aşkım." }
   ],
   // Çiçek animasyonu:
   // 1) VİDEO MODU (senin Gemini videon): dosya adını yaz, tetiklenince tam ekran oynar.
@@ -1470,10 +1469,9 @@ $("#kavisYazi").textContent = AYAR.kavisYazi;
 $("#kavisGolge").textContent = AYAR.kavisYazi;
 (function(){
   const uz = AYAR.kavisYazi.length;
-  const boyut = uz > 14 ? Math.max(21, Math.round(42 * 14 / uz)) : 42;
+  const boyut = uz > 14 ? Math.max(27, Math.round(46 * 14 / uz)) : 46;
   document.querySelectorAll(".kavis text").forEach(t => t.style.fontSize = boyut + "px");
 })();
-$("#girisAlt").textContent = AYAR.girisAlt;
 $("#girisMetin").textContent = AYAR.girisMetin;
 if (AYAR.favFoto) $("#girisFon").style.backgroundImage = `url('${AYAR.favFoto}')`;
 $("#sifreIpucu").textContent = AYAR.sifreIpucu || "";

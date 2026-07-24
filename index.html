@@ -1446,7 +1446,7 @@ const AYAR = {
   agacZarfNotu: "Sana bir şey yazdım, aç beni 💛",
   agacGorsel: "mektup.png",
   agacImza: "sana aşık oldum",   // mektup sayfasının sağ altındaki el yazısı     // ağaç/mektup sayfasının sağ üstüne gelen görsel (repoya bu adla yükle)
-  agacNotu: "İyi ki doğdun aşkım,|iyi ki senin ufaklığınım.|Umarım her doğum gününde|ufaklığın olurum.|Seni çok özledimm.|Seni çok seviyorum bitanemmm.❤️❤️❤️",
+  agacNotu: "İyi ki doğdun bitanem.|Kendi doğum günümde tek dileğim sendin,|her doğum gününde yanında olmayı dilemiştim.|Her anında yanında olacağım.|Yaşadıklarımızı anı olarak değil,|onların da üstüne koymak istiyorum.|Hayatta hiçbir şey senin kadar huzurlu hissettirmiyor,|hayatı hafifletiyorsun resmen.|Her hareketine yumuşayabildiğim tek insansın.|Hayatımın merkezi haline geldin|ve hep öyle kalmanı istiyorum.|İyi ki doğdun, nice birlikte senelere.|Seni çok seviyorum.❤️❤️❤️❤️",
   sayacOnEk: "Bir sonraki doğum gününe",   // sayaç satırının başındaki yazı
   sayacTarih: "2027-07-24T00:00:00",       // 24 Temmuz 2027
   sayacBittiYazi: "Doğum günün kutlu olsun! 🎉"
@@ -2164,12 +2164,13 @@ function agacNotYaz(){
   if (agacNotZamanlayici) clearInterval(agacNotZamanlayici);
   const hedef = $("#agacNotMetin");
   const metin = AYAR.agacNotu.split("|").join("\n");
+  const hiz = metin.length > 220 ? 30 : 55;   /* uzun mektupta daktilo hızlanır */
   let i = 0;
   agacNotZamanlayici = setInterval(() => {
     const ch = metin[i++];
     hedef.innerHTML += ch === "\n" ? "<br>" : ch;
     if (i >= metin.length) { clearInterval(agacNotZamanlayici); $("#agacImlec").style.display = "none"; }
-  }, 55);
+  }, hiz);
 }
 
 /* sayaç satırı */
